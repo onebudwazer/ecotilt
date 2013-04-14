@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>project_mobile_webservice</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<display-name>Webservice</display-name>
+		<servlet-name>Webservice</servlet-name>
+		<servlet-class>fr.projet.webservice.Webservice</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Webservice</servlet-name>
+		<url-pattern>/Webservice</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>Critaria</display-name>
+		<servlet-name>Critaria</servlet-name>
+		<servlet-class>fr.projet.webservice.Critaria</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Critaria</servlet-name>
+		<url-pattern>/Critaria</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>WsPompe</display-name>
+		<servlet-name>WsPompe</servlet-name>
+		<servlet-class>fr.projet.webservice.WsPompe</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WsPompe</servlet-name>
+		<url-pattern>/wspompe</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<display-name>WsBounding</display-name>
+		<servlet-name>WsBounding</servlet-name>
+		<servlet-class>fr.projet.webservice.WsBounding</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WsBounding</servlet-name>
+		<url-pattern>/wsbounding</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>Parameter</display-name>
+		<servlet-name>Parameter</servlet-name>
+		<servlet-class>fr.projet.webservice.Parameter</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Parameter</servlet-name>
+		<url-pattern>/Parameter</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<display-name>Count</display-name>
+		<servlet-name>Count</servlet-name>
+		<servlet-class>fr.projet.webservice.Count</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Count</servlet-name>
+		<url-pattern>/Count</url-pattern>
+	</servlet-mapping>
+</web-app>
