@@ -12,7 +12,7 @@ public class RandomNumber {
 	public static Double getRandomDouble(Double mod) {
 		Random rand = new Random();
 		Double value = (Math.abs(rand.nextDouble()) % mod * 100);
-		return (double)Math.round(value * 10000) / 10000;
+		return (double)Math.round(value * 10000000) / 10000000;
 	}
 
 	public static void main(String[] args) {

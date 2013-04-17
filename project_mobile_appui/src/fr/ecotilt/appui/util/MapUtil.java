@@ -1,12 +1,9 @@
 package fr.ecotilt.appui.util;
 
-import com.grum.geocalc.BoundingArea;
-import com.grum.geocalc.Coordinate;
-import com.grum.geocalc.DegreeCoordinate;
-import com.grum.geocalc.EarthCalc;
-import com.grum.geocalc.Point;
-
 import fr.ecotilt.appui.model.GeoCoord;
+import fr.geodesy.Ellipsoid;
+import fr.geodesy.GeodeticCalculator;
+import fr.geodesy.GlobalPosition;
 
 /**
  * Class qui regroupe les outils pour du calcul carto
@@ -16,115 +13,61 @@ import fr.ecotilt.appui.model.GeoCoord;
  */
 public class MapUtil {
 
-	private static final double DISTANCE_AREA = 100000; 
+	private static final double	DISTANCE_AREA	= 3000;
 
-	public static double distFrom(GeoCoord geo1, GeoCoord geo2) {
+	public static boolean distFrom2points(GeoCoord myLocation, GeoCoord pointRef) {
+		// ma position geo
+		GlobalPosition pointA = new GlobalPosition(myLocation.getLatitude(),
+				myLocation.getLongitude(), 0.0);
 
-		Coordinate lat1 = new DegreeCoordinate(geo1.getLatitude());
-		Coordinate lng1 = new DegreeCoordinate(geo1.getLongitude());
-		Point point1 = new Point(lat1, lng1);
+		GlobalPosition pointB = new GlobalPosition(pointRef.getLatitude(),
+				pointRef.getLongitude(), 0.0);
 
-		Coordinate lat2 = new DegreeCoordinate(geo2.getLatitude());
-		Coordinate lng2 = new DegreeCoordinate(geo2.getLongitude());
-		Point point2 = new Point(lat2, lng2);
+		Ellipsoid reference = Ellipsoid.WGS84;
+		GeodeticCalculator geoCalc = new GeodeticCalculator();
 
-		double distance = EarthCalc.getDistance(point1, point2);
-		return distance;
-	}
+		// Distance between Point A and Point B
+		double distance = geoCalc.calculateGeodeticCurve(reference, pointA,
+				pointB).getEllipsoidalDistance();
+		//System.out.println(distance + " meters");
 
-	public static GeoCoord distFrom(GeoCoord geo, double bearing,
-			double distance) {
-
-		Coordinate lat = new DegreeCoordinate(geo.getLatitude());
-		Coordinate lng = new DegreeCoordinate(geo.getLongitude());
-		Point point = new Point(lat, lng);
-		Point otherPoint = EarthCalc.pointRadialDistance(point, 45, distance);
-
-		return new GeoCoord(otherPoint.getLatitude(), otherPoint.getLongitude());
-	}
-
-	public static double getBearing(GeoCoord geo1, GeoCoord geo2) {
-		Coordinate lat1 = new DegreeCoordinate(geo1.getLatitude());
-		Coordinate lng1 = new DegreeCoordinate(geo1.getLongitude());
-		Point point1 = new Point(lat1, lng1);
-
-		Coordinate lat2 = new DegreeCoordinate(geo2.getLatitude());
-		Coordinate lng2 = new DegreeCoordinate(geo2.getLongitude());
-		Point point2 = new Point(lat2, lng2);
-
-		double roulement = EarthCalc.getBearing(point1, point2);
-
-		return roulement;
-	}
-
-//	public static BoundingArea getBoundingArea(GeoCoord geo) {
-//		Coordinate lat = new DegreeCoordinate(geo.getLatitude());
-//		Coordinate lng = new DegreeCoordinate(geo.getLongitude());
-//		Point point = new Point(lat, lng);
-//
-//		BoundingArea area = EarthCalc.getBoundingArea(point, DISTANCE_AREA);
-//		return area;
-//	}
-//
-//	public static boolean getPointIsArea(BoundingArea area,
-//			GeoCoord pointer) {
-//
-//		Coordinate latPointer = new DegreeCoordinate(pointer.getLatitude());
-//		Coordinate lngPointer = new DegreeCoordinate(pointer.getLongitude());
-//		Point pointFinder = new Point(latPointer, lngPointer);
-//		
-//		return area.isContainedWithin(pointFinder);
-//	}
-	
-	public static boolean getCalculetLocation(GeoCoord myLocation, GeoCoord pointRef) {
-		//ma position geo
-		Coordinate lat = new DegreeCoordinate(myLocation.getLatitude());
-		Coordinate lng = new DegreeCoordinate(myLocation.getLongitude());
-		Point point = new Point(lat, lng);
-		//rectangle bounding area
-		BoundingArea area = EarthCalc.getBoundingArea(point, DISTANCE_AREA);
-		
-		//pointer pour la comparaison 
-		Coordinate latPointer = new DegreeCoordinate(pointRef.getLatitude());
-		Coordinate lngPointer = new DegreeCoordinate(pointRef.getLongitude());
-		Point pointFinder = new Point(latPointer, lngPointer);
-		
-		boolean value =  area.isContainedWithin(pointFinder);
+		boolean value = false;
+		if (distance <= DISTANCE_AREA) {
+			value = true;
+		}
 		return value;
 	}
 
 	public static void main(String[] args) {
-		GeoCoord myLoc = new GeoCoord(42, -5005);
-		GeoCoord obj2 = new GeoCoord(42, 18);
-		
-		boolean value = getCalculetLocation(myLoc, obj2);
+		GeoCoord myLoc = new GeoCoord(42.000001, 4.75000001);
+		GeoCoord obj2 = new GeoCoord(42.000001, 4.750002);
+		System.out.println(myLoc.toString());
+		System.out.println(obj2.toString());
+
+		boolean value = distFrom2points(myLoc, obj2);
 		System.out.println(value);
-		
-		
-//		System.out.println(obj1);
-//		System.out.println(obj2);
-//		double distance = distFrom(obj1, obj2);
-//		System.out.println(distance + " meters");
-//		double bearing = getBearing(obj1, obj2);
-//		System.out.println(bearing);
-//
-//		GeoCoord newPoint = distFrom(obj2, bearing - 180, DISTANCE_AREA);
-//		System.out.println(newPoint);
-//
-//		getBoundingArea(obj1);
-//		GeoCoordArea zone = new GeoCoordArea(obj1, obj2);
-//		
-//		getPointIsArea(zone, new GeoCoord(50, 50));
-		
-		// System.out.println(kew);
-		// Point otherPoint = EarthCalc.pointRadialDistance(kew, 0, 10);
-		// System.out.println(otherPoint);
+
 	}
-	
-	
-	
-	
-	
+
+	// System.out.println(obj1);
+	// System.out.println(obj2);
+	// double distance = distFrom(obj1, obj2);
+	// System.out.println(distance + " meters");
+	// double bearing = getBearing(obj1, obj2);
+	// System.out.println(bearing);
+	//
+	// GeoCoord newPoint = distFrom(obj2, bearing - 180, DISTANCE_AREA);
+	// System.out.println(newPoint);
+	//
+	// getBoundingArea(obj1);
+	// GeoCoordArea zone = new GeoCoordArea(obj1, obj2);
+	//
+	// getPointIsArea(zone, new GeoCoord(50, 50));
+
+	// System.out.println(kew);
+	// Point otherPoint = EarthCalc.pointRadialDistance(kew, 0, 10);
+	// System.out.println(otherPoint);
+
 	// @Deprecated
 	// public static float distFrom(double lat1, double lng1, double lat2,
 	// double lng2) {
@@ -145,5 +88,42 @@ public class MapUtil {
 	// public static float distFrom(GeoCoord geo1, GeoCoord geo2) {
 	// return distFrom(geo1.getLatitude(), geo1.getLongitude(),
 	// geo2.getLatitude(), geo2.getLongitude());
+	// }
+
+	// public static BoundingArea getBoundingArea(GeoCoord geo) {
+	// Coordinate lat = new DegreeCoordinate(geo.getLatitude());
+	// Coordinate lng = new DegreeCoordinate(geo.getLongitude());
+	// Point point = new Point(lat, lng);
+	//
+	// BoundingArea area = EarthCalc.getBoundingArea(point, DISTANCE_AREA);
+	// return area;
+	// }
+	//
+	// public static boolean getPointIsArea(BoundingArea area,
+	// GeoCoord pointer) {
+	//
+	// Coordinate latPointer = new DegreeCoordinate(pointer.getLatitude());
+	// Coordinate lngPointer = new DegreeCoordinate(pointer.getLongitude());
+	// Point pointFinder = new Point(latPointer, lngPointer);
+	//
+	// return area.isContainedWithin(pointFinder);
+	// }
+
+	// public static boolean getCalculetLocation(GeoCoord myLocation, GeoCoord
+	// pointRef) {
+	// //ma position geo
+	// Coordinate lat = new DegreeCoordinate(myLocation.getLatitude());
+	// Coordinate lng = new DegreeCoordinate(myLocation.getLongitude());
+	// Point point = new Point(lat, lng);
+	// //rectangle bounding area
+	// BoundingArea area = EarthCalc.getBoundingArea(point, DISTANCE_AREA);
+	// System.out.println(area.toString());
+	// //pointer pour la comparaison
+	// Coordinate latPointer = new DegreeCoordinate(pointRef.getLatitude());
+	// Coordinate lngPointer = new DegreeCoordinate(pointRef.getLongitude());
+	// Point pointFinder = new Point(latPointer, lngPointer);
+	//
+	// boolean value = area.isContainedWithin(pointFinder);
+	// return value;
 	// }
 }

@@ -15,7 +15,7 @@
 	<servlet>
 		<display-name>Webservice</display-name>
 		<servlet-name>Webservice</servlet-name>
-		<servlet-class>fr.projet.webservice.Webservice</servlet-class>
+		<servlet-class>fr.ecotilt.webservice.Webservice</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Webservice</servlet-name>
@@ -24,7 +24,7 @@
 	<servlet>
 		<display-name>Critaria</display-name>
 		<servlet-name>Critaria</servlet-name>
-		<servlet-class>fr.projet.webservice.Critaria</servlet-class>
+		<servlet-class>fr.ecotilt.webservice.Critaria</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Critaria</servlet-name>
@@ -34,7 +34,7 @@
 	<servlet>
 		<display-name>WsPompe</display-name>
 		<servlet-name>WsPompe</servlet-name>
-		<servlet-class>fr.projet.webservice.WsPompe</servlet-class>
+		<servlet-class>fr.ecotilt.webservice.WsPompe</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WsPompe</servlet-name>
@@ -44,7 +44,7 @@
 		<servlet>
 		<display-name>WsBounding</display-name>
 		<servlet-name>WsBounding</servlet-name>
-		<servlet-class>fr.projet.webservice.WsBounding</servlet-class>
+		<servlet-class>fr.ecotilt.webservice.WsBounding</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WsBounding</servlet-name>
@@ -54,20 +54,30 @@
 	<servlet>
 		<display-name>Parameter</display-name>
 		<servlet-name>Parameter</servlet-name>
-		<servlet-class>fr.projet.webservice.Parameter</servlet-class>
+		<servlet-class>fr.ecotilt.webservice.Parameter</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Parameter</servlet-name>
 		<url-pattern>/Parameter</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
-		<display-name>Count</display-name>
-		<servlet-name>Count</servlet-name>
-		<servlet-class>fr.projet.webservice.Count</servlet-class>
+	<servlet>
+		<display-name>WsCount</display-name>
+		<servlet-name>WsCount</servlet-name>
+		<servlet-class>fr.ecotilt.webservice.WsCount</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Count</servlet-name>
-		<url-pattern>/Count</url-pattern>
+		<servlet-name>WsCount</servlet-name>
+		<url-pattern>/wscount</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>WsVelib</display-name>
+		<servlet-name>WsVelib</servlet-name>
+		<servlet-class>fr.ecotilt.webservice.WsVelib</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WsVelib</servlet-name>
+		<url-pattern>/wsvelib</url-pattern>
 	</servlet-mapping>
 </web-app>
