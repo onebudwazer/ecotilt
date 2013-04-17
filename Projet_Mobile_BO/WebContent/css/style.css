@@ -1,0 +1,235 @@
+body {
+	margin-top:20px;
+	width: 900px;
+	text-align: center;
+}
+
+.tumefaischier{
+	background-color: green;
+	
+}
+
+#menuBar{
+	background-color: gray;
+	width: 100%;
+	height: 20%;
+}
+
+
+.ovale{
+	width:300px;
+	height:200px;
+	background:#069;
+	-webkit-border-radius:150px / 100px;
+	-moz-border-radius:150px / 100px;
+	-o-border-radius:150px / 100px;
+}
+
+.header {
+	position: relative;
+	border: 1px solid #BBB;
+	background-color: #63B6E7;
+	width: 900px;
+	height: 140px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 80px;
+	behavior: url(C:\eclipseJEE\workspace\planning\WebContent\WEB-INF\css\border-radius.htc);
+}
+
+.logo {
+	position: absolute;
+}
+
+.title {
+	text-shadow: 10px 10px 10px #000;
+	position: absolute;
+	bottom: 30px;
+	left: 30px;
+	font-size: 30pt;
+	color: #000000;
+}
+
+.loginForm {
+	position: absolute;
+	text-align:right;
+	top: 10px;
+	right: 10px;
+	font-size: 12pt;
+	color: #000000;
+}
+
+.loginForm form:form {
+	position: relative;
+	bottom: 10px;
+	right: 10px;
+	font-size: 12pt;
+	color: #000000;
+}
+
+.loginForm .label {
+	display:inline-block;
+	width:90px;
+	font-size: 11pt;
+	color: #00000;
+}
+
+.loginForm .field {
+	font-size: 10pt;
+	font-family: Lucida Grande, sans-serif;
+	border: 1px solid #BBB;
+	margin-bottom: 3px;
+	margin-left: 5px;
+}
+
+.loginForm .submit {
+	font-size: 10pt;
+	font-family: Lucida Grande, sans-serif;
+	border: 3px solid #AAA;
+	background-color: #FFE;
+	cursor:pointer;
+}
+
+.loginForm .nickname {
+	font-size: 13pt;
+	font-family: Lucida Grande, sans-serif;
+	color: #777;
+	margin-bottom: 10px;
+}
+
+.loginForm .error {
+	display:inline;
+	font-size: 11pt;
+	color:#440000;
+	font-family: Lucida Grande, sans-serif;
+	margin-bottom: 10px;
+}
+
+.content {
+	text-align:center;
+	border: 1px solid #BBB;
+	border-top: none;
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+.commands {
+	position: relative;
+    width: 900px;
+	height: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;	
+}
+
+.commands  a {
+	color: #300;
+	padding: 5px;
+	margin: 0 1px;
+	text-decoration: none;
+}
+
+.searchForm {
+	position: relative;
+	border: 1px solid #BBB;
+	border-bottom: 1px dashed #BBB;
+	width: 900px;
+	height: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top:20px;
+	text-align:center;	
+	font-family: Lucida Grande, sans-serif;
+	font-size: 14pt;
+}
+
+.searchForm .field {
+	font-family: Lucida Grande, sans-serif;
+	font-size: 14pt;
+	border: 1px solid #BBB;
+}
+
+.searchForm .submit {
+	font-family: Lucida Grande, sans-serif;
+	font-size: 14pt;
+	border: 1px solid #AAA;
+	cursor:pointer;
+	background-color: #FFE;
+}
+
+.searchForm .message {
+	font-family: Lucida Grande, sans-serif;
+	font-size: 12pt;
+}
+
+.searchForm .message a {
+	color: #440000;
+	text-decoration: none;
+}
+
+.footbar {
+	width: 900px;
+	background-color: #63B6E7;
+	border: 1px solid #BBB;
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;	
+	font-family: Lucida Grande, sans-serif;
+	font-size: 8pt;
+	padding-top:4px;
+	color:#300;
+	
+}
+
+.content .form {
+	display:inline-block;
+	width:400px;
+	text-align:right;
+	padding-top:30px;
+	padding-bottom:30px;
+}
+
+.content .form .field {
+	display:inline-block;
+	font-family: Lucida Grande, sans-serif;
+	font-size: 12pt;
+	border: 1px solid #BBB;
+	margin-bottom:8px;
+	width:200px;
+}
+
+.content .form .fixed {
+	border: 1px solid #FFF;
+}
+
+.content .form .submit {
+	font-family: Lucida Grande, sans-serif;
+	font-size: 12pt;
+	border: 1px solid #AAA;
+	margin-bottom:8px;
+	background-color: #FFE;
+	cursor:pointer;
+}
+
+.content .form label {
+	font-family: Lucida Grande, sans-serif;
+	font-size: 12pt;
+	margin-bottom:8px;
+}
+
+.content .message {
+	font-family: Lucida Grande, sans-serif;
+	font-size: 12pt;
+	border: 1px dashed #844;
+	margin-left:100px;
+	margin-right:100px;
+	padding:4px;
+}
+
+.errorMessage{
+	color: red;
+	font-weignt: bold;
+}
