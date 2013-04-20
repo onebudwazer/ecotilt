@@ -30,7 +30,7 @@
 		<servlet-name>Critaria</servlet-name>
 		<url-pattern>/Critaria</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<display-name>WsPompe</display-name>
 		<servlet-name>WsPompe</servlet-name>
@@ -40,8 +40,8 @@
 		<servlet-name>WsPompe</servlet-name>
 		<url-pattern>/wspompe</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<display-name>WsBounding</display-name>
 		<servlet-name>WsBounding</servlet-name>
 		<servlet-class>fr.ecotilt.webservice.WsBounding</servlet-class>
@@ -50,7 +50,7 @@
 		<servlet-name>WsBounding</servlet-name>
 		<url-pattern>/wsbounding</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<display-name>Parameter</display-name>
 		<servlet-name>Parameter</servlet-name>
@@ -60,7 +60,7 @@
 		<servlet-name>Parameter</servlet-name>
 		<url-pattern>/Parameter</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<display-name>WsCount</display-name>
 		<servlet-name>WsCount</servlet-name>
@@ -70,7 +70,7 @@
 		<servlet-name>WsCount</servlet-name>
 		<url-pattern>/wscount</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<display-name>WsVelib</display-name>
 		<servlet-name>WsVelib</servlet-name>
@@ -80,4 +80,18 @@
 		<servlet-name>WsVelib</servlet-name>
 		<url-pattern>/wsvelib</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<display-name>WsGenerateDatabase</display-name>
+		<servlet-name>WsGenerateDatabase</servlet-name>
+		<servlet-class>fr.ecotilt.webservice.WsGenerateDatabase</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WsGenerateDatabase</servlet-name>
+		<url-pattern>/wsgeneratedatabase</url-pattern>
+	</servlet-mapping>
+	
+	<listener>
+		<listener-class>fr.ecotilt.webservice.util.AppServletContextListener</listener-class>
+	</listener>
 </web-app>
