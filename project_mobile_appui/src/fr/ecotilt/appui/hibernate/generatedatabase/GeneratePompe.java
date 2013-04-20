@@ -25,7 +25,7 @@ public class GeneratePompe {
 		session.close();
 	}
 
-	private static void generateBorne(Session session) {
+	public static void generateBorne(Session session) {
 		for (int i = 0; i < 10; i++) {
 			ImageUtil instance = new ImageUtil("/fr/ecotilt/appui/rsc/2013.jpg");
 			byte[] bInstanceImg = instance.getImgToByteScalr();
@@ -40,7 +40,7 @@ public class GeneratePompe {
 		}
 	}
 
-	private static void generatePompe(Session session) {
+	public static void generatePompe(Session session) {
 		for (int i = 0; i < 10; i++) {
 			ImageUtil instance = new ImageUtil("/fr/ecotilt/appui/rsc/2013.jpg");
 			byte[] bInstanceImg = instance.getImgToByteScalr();
@@ -54,7 +54,7 @@ public class GeneratePompe {
 		}
 	}
 
-	private static void generateVelib(Session session) {
+	public static void generateVelib(Session session) {
 		for (int i = 0; i < 10; i++) {
 			ImageUtil instance = new ImageUtil("/fr/ecotilt/appui/rsc/2013.jpg");
 			byte[] bInstanceImg = instance.getImgToByteScalr();

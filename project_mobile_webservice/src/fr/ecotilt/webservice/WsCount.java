@@ -41,7 +41,7 @@ public class WsCount extends HttpServlet {
 		Count modelCount = WebServiceConfig
 				.getInstance().queryCountingFrom(session, queryParameters);
 		// reponse
-		WebServiceConfig.getInstance().setReponseHttp(response, modelCount, 1);
+		WebServiceConfig.getInstance().setReponseHttp(response, modelCount);
 
 		// on ferme la session
 		session.close();

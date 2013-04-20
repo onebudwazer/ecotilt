@@ -9,13 +9,31 @@ import fr.geodesy.GlobalPosition;
  * Class qui regroupe les outils pour du calcul carto
  * 
  * @author Philippe
- * 
  */
 public class MapUtil {
 
-	private static final double	DISTANCE_AREA	= 3000;
+	private double	DISTANCE_AREA	= 3000;
 
-	public static boolean distFrom2points(GeoCoord myLocation, GeoCoord pointRef) {
+	private MapUtil() {
+	}
+
+	private static class LazySingleton {
+		private static MapUtil	instance	= new MapUtil();
+	}
+
+	public static MapUtil getInstance() {
+		return LazySingleton.instance;
+	}
+
+	public double setDistanceArea(double value) {
+		return this.DISTANCE_AREA = value;
+	}
+
+	public double getDistanceArea() {
+		return DISTANCE_AREA;
+	}
+
+	public boolean distFrom2points(GeoCoord myLocation, GeoCoord pointRef) {
 		// ma position geo
 		GlobalPosition pointA = new GlobalPosition(myLocation.getLatitude(),
 				myLocation.getLongitude(), 0.0);
@@ -29,7 +47,7 @@ public class MapUtil {
 		// Distance between Point A and Point B
 		double distance = geoCalc.calculateGeodeticCurve(reference, pointA,
 				pointB).getEllipsoidalDistance();
-		//System.out.println(distance + " meters");
+		// System.out.println(distance + " meters");
 
 		boolean value = false;
 		if (distance <= DISTANCE_AREA) {
@@ -44,7 +62,7 @@ public class MapUtil {
 		System.out.println(myLoc.toString());
 		System.out.println(obj2.toString());
 
-		boolean value = distFrom2points(myLoc, obj2);
+		boolean value = MapUtil.getInstance().distFrom2points(myLoc, obj2);
 		System.out.println(value);
 
 	}

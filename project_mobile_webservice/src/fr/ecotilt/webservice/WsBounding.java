@@ -57,7 +57,7 @@ public class WsBounding extends HttpServlet {
 			Pompe instancePompe = result.get(i);
 			System.out.println(instancePompe.getGeoCoord());
 			
-			boolean value = MapUtil.distFrom2points(myLoc, instancePompe.getGeoCoord());
+			boolean value = MapUtil.getInstance().distFrom2points(myLoc, instancePompe.getGeoCoord());
 			System.out.println(value);
 			if (value) {
 				resultPompe.add(instancePompe);

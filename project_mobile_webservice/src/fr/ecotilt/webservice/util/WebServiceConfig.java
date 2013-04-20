@@ -84,6 +84,10 @@ public class WebServiceConfig {
 			response.getWriter().write("none");
 		}
 	}
+	
+	public void setReponseHttp(HttpServletResponse response, Object result) throws IOException {
+		this.setReponseHttp(response, result, 1);
+	}
 
 	/**
 	 * defini l'entete du request http
@@ -131,6 +135,9 @@ public class WebServiceConfig {
 			}
 			if (key.equals("lat")) {
 				latitude = Double.valueOf(value);
+			}
+			if (key.equals("d")) {
+				MapUtil.getInstance().setDistanceArea(Double.valueOf(value));
 			}
 		}
 		
@@ -245,7 +252,7 @@ public class WebServiceConfig {
 				AGenericObject instanceObject = (AGenericObject) myList
 						.get(index);
 				GeoCoord refGeoCoord = instanceObject.getGeoCoord();
-				boolean value = MapUtil
+				boolean value = MapUtil.getInstance()
 						.distFrom2points(myPosition, refGeoCoord);
 				if (value == true) {
 					newResult.add(instanceObject);

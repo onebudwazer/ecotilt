@@ -98,7 +98,7 @@ public class Webservice extends HttpServlet {
 			query.setCacheable(true);
 			query.setMaxResults(PAGE_SIZE);
 			query.setFirstResult(PAGE_SIZE * pageNumber);
-			List<Pompe> result = query.list();
+			List<Pompe> result = (List<Pompe>) query.list();
 			
 			System.out.println(result);
 			
