@@ -3,14 +3,16 @@
                                          "http://www.jboss.org/dtd/hibernate/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> -->
-		<!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> -->
-		<!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1/HIBERNATE</property> -->
-		
-		<property name="hibernate.dialect"> org.hibernate.dialect.PostgreSQLDialect</property>
-		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://natek.no-ip.org/hibernate</property>
-		
+		<!-- Configuration MariaDB -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1/HIBERNATE</property>
+
+		<!-- Configuration postgresql -->
+		<!-- <property name="hibernate.dialect"> org.hibernate.dialect.PostgreSQLDialect</property> -->
+		<!-- <property name="hibernate.connection.driver_class">org.postgresql.Driver</property> -->
+		<!-- <property name="hibernate.connection.url">jdbc:postgresql://natek.no-ip.org/couche</property> -->
+
 		<property name="hibernate.connection.username">natek</property>
 		<property name="hibernate.connection.password">natekpassword</property>
 		<property name="hibernate.show_sql">true</property>
