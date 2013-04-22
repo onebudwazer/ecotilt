@@ -62,5 +62,7 @@ public class WsPompe extends HttpServlet {
 		
 		//on ferme la session 
 		session.close();
+		
+		System.out.println(finalResult.size());
 	}
 }

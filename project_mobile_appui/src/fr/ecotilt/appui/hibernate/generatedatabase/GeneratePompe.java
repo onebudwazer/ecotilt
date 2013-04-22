@@ -26,7 +26,7 @@ public class GeneratePompe {
 	}
 
 	public static void generateBorne(Session session) {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			ImageUtil instance = new ImageUtil("/fr/ecotilt/appui/rsc/300x300.png");
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();

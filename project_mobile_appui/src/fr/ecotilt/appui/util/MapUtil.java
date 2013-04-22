@@ -32,6 +32,12 @@ public class MapUtil {
 	public double getDistanceArea() {
 		return DISTANCE_AREA;
 	}
+	
+	public String getLinkGoogleMaps(double latitude, double longitude) {
+		String lat = String.valueOf(latitude);
+		String lng = String.valueOf(longitude);
+		return "https://maps.google.com/maps?q=" + lat + "," + lng;
+	}
 
 	public boolean distFrom2points(GeoCoord myLocation, GeoCoord pointRef) {
 		// ma position geo
