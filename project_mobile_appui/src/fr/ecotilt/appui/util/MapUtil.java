@@ -6,13 +6,17 @@ import fr.geodesy.GeodeticCalculator;
 import fr.geodesy.GlobalPosition;
 
 /**
- * Class qui regroupe les outils pour du calcul carto
+ * Classe qui regroupe 
+ * les outils pour du calcul carto
  * @author Philippe
  */
 public class MapUtil {
 
 	private double	DISTANCE_AREA	= 3000;
 
+	/**
+	 * constructeur prive explicite
+	 */
 	private MapUtil() {
 	}
 
@@ -104,7 +108,6 @@ public class MapUtil {
 	// BoundingArea area = EarthCalc.getBoundingArea(point, DISTANCE_AREA);
 	// return area;
 	// }
-	//
 	// public static boolean getPointIsArea(BoundingArea area,
 	// GeoCoord pointer) {
 	//

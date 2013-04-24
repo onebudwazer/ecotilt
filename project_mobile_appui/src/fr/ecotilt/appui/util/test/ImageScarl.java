@@ -20,7 +20,7 @@ public class ImageScarl {
 		// BufferedImage scaledImage =
 		// Scalr.resize(instance.getInstanceBufferedImage(), 400);
 		BufferedImage scaledImage = Scalr.resize(
-				instance.getInstanceBufferedImage(), Method.SPEED, 500,
+				instance.getBufferedImage(), Method.SPEED, 500,
 				Scalr.OP_ANTIALIAS, Scalr.OP_BRIGHTER);
 		File outputfile = new File("C:\\test.jpg");
 		ImageIO.write(scaledImage, "jpg", outputfile);

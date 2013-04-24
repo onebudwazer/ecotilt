@@ -17,37 +17,47 @@ import org.imgscalr.Scalr.Method;
 
 import fr.ecotilt.appui.rsc.Ressources;
 
+/**
+ * Permet le traitement d'une image
+ * dependance vers lib Scalr
+ * @author Philippe
+ *
+ */
 public class ImageUtil {
 
 	private URL					url;
+
 	private static final int	SIZE_IMG	= 400;
+
+	private BufferedImage		instanceBufferedImage;
 
 	/**
 	 * Chemin de la ressource IMAGE en rapport au projet appui
+	 * 
 	 * @param path
+	 *            of ressources
 	 */
 	public ImageUtil(String path) {
 		url = Ressources.class.getResource(path);
-	}
 
-	/**
-	 * Donne l'instance BufferedImage Original
-	 * 
-	 * @return
-	 */
-	public BufferedImage getInstanceBufferedImage() {
 		try {
-			BufferedImage originalImage = ImageIO.read(url);
-			return originalImage;
+			instanceBufferedImage = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+	}
+
+	/**
+	 * Donne l'instance BufferedImage
+	 * 
+	 * @return instanceBufferedImage
+	 */
+	public BufferedImage getBufferedImage() {
+		return instanceBufferedImage;
 	}
 
 	public byte[] getImgToByteScalr() {
-		BufferedImage originalImage = getInstanceBufferedImage();
-		BufferedImage finalImage = Scalr.resize(originalImage,
+		BufferedImage finalImage = Scalr.resize(instanceBufferedImage,
 				Method.AUTOMATIC, SIZE_IMG, Scalr.OP_ANTIALIAS,
 				Scalr.OP_BRIGHTER);
 		try {
@@ -62,9 +72,10 @@ public class ImageUtil {
 		return null;
 	}
 
+	@Deprecated
+	@SuppressWarnings("unused")
 	public byte[] getImgToByteOriginal() {
-		BufferedImage originalImage = getInstanceBufferedImage();
-		@SuppressWarnings("unused")
+		BufferedImage originalImage = instanceBufferedImage;
 		Dimension originSizeImg = new Dimension(originalImage.getWidth(),
 				originalImage.getHeight());
 		try {
@@ -148,8 +159,6 @@ public class ImageUtil {
 
 	// System.out.println(generateByteImg("C:\\eclipse\\test.jpg"));
 	// public byte[] extractBytes (String ImageName) throws IOException {
-	// File imgPath = new File(ImageName);
-	// BufferedImage bufferedImage = ImageIO.read(imgPath);
 	// WritableRaster raster = bufferedImage .getRaster();
 	// DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
 }
