@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -20,27 +19,15 @@ import fr.ecotilt.appui.rsc.Ressources;
 
 public class ImageUtil {
 
-	private File				input;
-
+	private URL					url;
 	private static final int	SIZE_IMG	= 400;
 
 	/**
 	 * Chemin de la ressource IMAGE en rapport au projet appui
-	 * 
 	 * @param path
 	 */
 	public ImageUtil(String path) {
-		URL in = Ressources.class.getClass().getResource(path);
-
-		try {
-			input = new File(in.toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public ImageUtil(File file) {
-		input = file;
+		url = Ressources.class.getResource(path);
 	}
 
 	/**
@@ -50,7 +37,7 @@ public class ImageUtil {
 	 */
 	public BufferedImage getInstanceBufferedImage() {
 		try {
-			BufferedImage originalImage = ImageIO.read(this.input);
+			BufferedImage originalImage = ImageIO.read(url);
 			return originalImage;
 		} catch (IOException e) {
 			e.printStackTrace();

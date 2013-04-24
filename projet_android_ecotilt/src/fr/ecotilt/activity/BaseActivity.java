@@ -1,12 +1,12 @@
 package fr.ecotilt.activity;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import fr.ecotilt.rsc.R;
-
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import fr.ecotilt.rsc.R;
 
 public abstract class BaseActivity extends Activity {
 

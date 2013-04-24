@@ -7,7 +7,6 @@ import fr.geodesy.GlobalPosition;
 
 /**
  * Class qui regroupe les outils pour du calcul carto
- * 
  * @author Philippe
  */
 public class MapUtil {
@@ -33,12 +32,6 @@ public class MapUtil {
 		return DISTANCE_AREA;
 	}
 	
-	public String getLinkGoogleMaps(double latitude, double longitude) {
-		String lat = String.valueOf(latitude);
-		String lng = String.valueOf(longitude);
-		return "https://maps.google.com/maps?q=" + lat + "," + lng;
-	}
-
 	public boolean distFrom2points(GeoCoord myLocation, GeoCoord pointRef) {
 		// ma position geo
 		GlobalPosition pointA = new GlobalPosition(myLocation.getLatitude(),
@@ -70,22 +63,17 @@ public class MapUtil {
 
 		boolean value = MapUtil.getInstance().distFrom2points(myLoc, obj2);
 		System.out.println(value);
-
 	}
 
-	// System.out.println(obj1);
-	// System.out.println(obj2);
 	// double distance = distFrom(obj1, obj2);
 	// System.out.println(distance + " meters");
 	// double bearing = getBearing(obj1, obj2);
 	// System.out.println(bearing);
-	//
 	// GeoCoord newPoint = distFrom(obj2, bearing - 180, DISTANCE_AREA);
 	// System.out.println(newPoint);
 	//
 	// getBoundingArea(obj1);
 	// GeoCoordArea zone = new GeoCoordArea(obj1, obj2);
-	//
 	// getPointIsArea(zone, new GeoCoord(50, 50));
 
 	// System.out.println(kew);
@@ -108,12 +96,6 @@ public class MapUtil {
 	// int meterConversion = 1609;
 	// return new Float(dist * meterConversion).floatValue();
 	// }
-	//
-	// public static float distFrom(GeoCoord geo1, GeoCoord geo2) {
-	// return distFrom(geo1.getLatitude(), geo1.getLongitude(),
-	// geo2.getLatitude(), geo2.getLongitude());
-	// }
-
 	// public static BoundingArea getBoundingArea(GeoCoord geo) {
 	// Coordinate lat = new DegreeCoordinate(geo.getLatitude());
 	// Coordinate lng = new DegreeCoordinate(geo.getLongitude());
@@ -131,8 +113,6 @@ public class MapUtil {
 	// Point pointFinder = new Point(latPointer, lngPointer);
 	//
 	// return area.isContainedWithin(pointFinder);
-	// }
-
 	// public static boolean getCalculetLocation(GeoCoord myLocation, GeoCoord
 	// pointRef) {
 	// //ma position geo

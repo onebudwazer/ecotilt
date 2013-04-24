@@ -1,8 +1,8 @@
 package fr.ecotilt.activity;
 
+import fr.ecotilt.rsc.R;
 import android.os.Bundle;
 import android.view.Menu;
-import fr.ecotilt.rsc.R;
 
 public class MainActivity extends BaseActivity {
 

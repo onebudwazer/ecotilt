@@ -223,8 +223,8 @@ public class WebServiceConfig {
 
 	public Query queryConfiguration(Query query) {
 		query.setCacheable(true);
-//		query.setMaxResults(PAGE_SIZE);
-//		query.setFirstResult(PAGE_SIZE * pageNumber);
+		query.setMaxResults(PAGE_SIZE);
+		query.setFirstResult(PAGE_SIZE * pageNumber);
 		return query;
 	}
 
