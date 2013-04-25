@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -21,8 +20,8 @@ public abstract class AGenericObject {
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
-	private int			id;
-	
+	private int				id;
+
 	@Column(name = "NAME")
 	protected String		name;
 
@@ -31,7 +30,7 @@ public abstract class AGenericObject {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "GEOCOORD_ID")
-	protected GeoCoord	gc;
+	protected GeoCoord		gc;
 
 	@Column(name = "CITY")
 	protected String		city;
@@ -39,19 +38,19 @@ public abstract class AGenericObject {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PICTURE_ID")
 	protected PictureEntity	pe;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CATEGORY_ID", nullable = false)
-	protected Category		category;
 
-	@Column(name="DATE")
+	// @ManyToOne(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "CATEGORY_ID", nullable = false)
+	// protected Category category;
+
+	@Column(name = "DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	protected Date date;
-	
+	protected Date			date;
+
 	public AGenericObject() {
 		this.date = new Date();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -104,25 +103,24 @@ public abstract class AGenericObject {
 		this.pe = pe;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+	// public Category getCategory() {
+	// return category;
+	// }
+	//
+	// public void setCategory(Category category) {
+	// this.category = category;
+	// }
 
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public Date getDate() {
-	    return date;
-	}
-	
-	public void setDate(Date date) {
-	    this.date = date;
+		return date;
 	}
 
-	
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 }

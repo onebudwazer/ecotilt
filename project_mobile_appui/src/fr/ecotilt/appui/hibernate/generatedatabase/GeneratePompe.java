@@ -6,7 +6,6 @@ import org.hibernate.Session;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
 import fr.ecotilt.appui.model.BorneElectrique;
-import fr.ecotilt.appui.model.Category;
 import fr.ecotilt.appui.model.GeoCoord;
 import fr.ecotilt.appui.model.PictureEntity;
 import fr.ecotilt.appui.model.Pompe;
@@ -35,9 +34,11 @@ public class GeneratePompe {
 					.saveToHibernate(session, new Pompe("Borne " + i, "Toulon",
 							RandomNumber.getRandomInt(99999), new GeoCoord(
 									RandomNumber.randomAreaMarseilleLatitude(),
-									RandomNumber.randomAreaMarseilleLongitude()), pe,
-							new Category("Pompe")));
+									RandomNumber.randomAreaMarseilleLongitude()), pe));
 		}
+		
+		
+		
 	}
 
 	public static void generatePompe(Session session) {
@@ -49,8 +50,7 @@ public class GeneratePompe {
 			HibernateUtil.saveToHibernate(session, new BorneElectrique("Pompe "
 					+ i, "Toulon", RandomNumber.getRandomInt(99999),
 					new GeoCoord(RandomNumber.randomAreaMarseilleLatitude(),
-							RandomNumber.randomAreaMarseilleLongitude()), pe,
-					new Category("Pompe")));
+							RandomNumber.randomAreaMarseilleLongitude()), pe));
 		}
 	}
 
@@ -63,8 +63,7 @@ public class GeneratePompe {
 			HibernateUtil.saveToHibernate(session, new Velib("Velib " + i,
 					"Toulon", RandomNumber.getRandomInt(99999), new GeoCoord(
 							RandomNumber.randomAreaMarseilleLatitude(),
-							RandomNumber.randomAreaMarseilleLongitude()), pe,
-					new Category("Pompe")));
+							RandomNumber.randomAreaMarseilleLongitude()), pe));
 		}
 	}
 

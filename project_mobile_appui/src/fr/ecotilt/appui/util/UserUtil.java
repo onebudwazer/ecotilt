@@ -43,7 +43,6 @@ public class UserUtil {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 	

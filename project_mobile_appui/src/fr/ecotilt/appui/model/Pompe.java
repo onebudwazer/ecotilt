@@ -20,13 +20,12 @@ public class Pompe extends AGenericObject {
 	public Pompe() {
 	}
 
-	public Pompe(String name, String city, int cp, GeoCoord gc, PictureEntity pe, Category category) {
+	public Pompe(String name, String city, int cp, GeoCoord gc, PictureEntity pe) {
 		this.name = name;
 		this.gc = gc;
 		this.codePostal = cp;
 		this.city = city;
 		this.pe = pe;
-		this.category = category;
 	}
 	
 	public String toString() {
@@ -36,8 +35,6 @@ public class Pompe extends AGenericObject {
 		b.append(this.codePostal);
 		b.append(" ");
 		b.append(this.city);
-		b.append(" ");
-		b.append(this.category);
 		return b.toString();
 	}
 	
