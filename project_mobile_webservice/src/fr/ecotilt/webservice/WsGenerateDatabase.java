@@ -11,7 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
-import fr.ecotilt.appui.hibernate.generatedatabase.GeneratePompe;
+import fr.ecotilt.appui.hibernate.generatedatabase.GeneratePoint;
 import fr.ecotilt.appui.model.BorneElectrique;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.appui.model.Velib;
@@ -40,9 +40,9 @@ public class WsGenerateDatabase extends HttpServlet {
 				.setProjection(Projections.rowCount()).uniqueResult();
 
 		if (countBorneElectrique == 0 && countPompe == 0 && countVelib == 0) {
-			 GeneratePompe.generateBorne(session);
-			 GeneratePompe.generatePompe(session);
-			 GeneratePompe.generateVelib(session);
+			 GeneratePoint.generateBorne(session);
+			 GeneratePoint.generateBorneElectrique(session);
+			 GeneratePoint.generateVelib(session);
 			 WebServiceConfig.getInstance().setReponseHttp(response, "Generation de la base...");
 		} else {
 			WebServiceConfig.getInstance().setReponseHttp(response, "Generation de la base...déjà fait");
