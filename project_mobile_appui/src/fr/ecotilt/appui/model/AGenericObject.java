@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -39,9 +40,9 @@ public abstract class AGenericObject {
 	@JoinColumn(name = "PICTURE_ID")
 	protected PictureEntity	pe;
 
-	// @ManyToOne(cascade = CascadeType.ALL)
-	// @JoinColumn(name = "CATEGORY_ID", nullable = false)
-	// protected Category category;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CATEGORY_ID", nullable = true)
+	protected Category		category;
 
 	@Column(name = "DATE")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -103,13 +104,13 @@ public abstract class AGenericObject {
 		this.pe = pe;
 	}
 
-	// public Category getCategory() {
-	// return category;
-	// }
-	//
-	// public void setCategory(Category category) {
-	// this.category = category;
-	// }
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public void setId(int id) {
 		this.id = id;

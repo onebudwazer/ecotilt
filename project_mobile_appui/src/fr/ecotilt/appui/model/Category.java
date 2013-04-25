@@ -1,7 +1,5 @@
 package fr.ecotilt.appui.model;
 
-import java.util.Set;
-
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,25 +21,24 @@ public class Category {
 	@Id
 	@GeneratedValue
 	@Column(name = "CATEGORY_ID", unique = true)
-	private long	categoryId;
+	private long		categoryId;
 
 	@Column(name = "CATEGORY_NAME", nullable = true, length = 100, unique = true)
-	private String	categoryName;
+	private String		categoryName;
 
 	@Column(name = "CATEGORIE_DESCRIPTION")
-	private String	description;
+	private String		description;
 
-	private Set<AGenericObject> Items;
-	
 	public Category() {
+	}
+
+	public Category(String categoryName, String description) {
+		this.categoryName = categoryName;
+		this.description = description;
 	}
 
 	public long getCategoryId() {
 		return this.categoryId;
-	}
-
-	public Category(String categoryName) {
-		this.categoryName = categoryName;
 	}
 
 	public void setCategoryId(long categoryId) {
@@ -64,14 +61,4 @@ public class Category {
 		this.description = description;
 	}
 
-	public Set<AGenericObject> getItems() {
-		return Items;
-	}
-
-	public void setItems(Set<AGenericObject> items) {
-		Items = items;
-	}
-	
-	
-	
 }
