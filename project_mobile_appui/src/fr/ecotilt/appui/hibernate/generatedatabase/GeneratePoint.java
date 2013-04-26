@@ -21,33 +21,30 @@ public class GeneratePoint {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		// generateBorne(session);
 		// generateVelib(session);
-		
-//		Category instance = CategoryManager.getInstance().addCategory(session, "BorneElectrique");
-		
-//		@SuppressWarnings("unchecked")
-//		List<BorneElectrique> list = session.createCriteria(BorneElectrique.class).list();
-//		for (BorneElectrique borneElectrique : list) {
-//			borneElectrique.setCategory(instance);
-//			HibernateUtil.updateToHibernate(session, borneElectrique);
-//		}
-		
-		System.out.println("STOP");
-		
-//		CategoryManager.getInstance().addCategory(session, "3");
-//		CategoryManager.getInstance().addCategory(session, "1");
-//		Category instance = CategoryManager.getInstance().addCategory(session, "BorneElectrique");
-		int value = CategoryManager.getInstance().removeCategory(session, "1");
-		
-//		generateBorneElectrique(session);
-		System.out.println(value);
-//		
+		// Category instance =
+		// CategoryManager.getInstance().addCategory(session,
+		// "BorneElectrique");
+		// @SuppressWarnings("unchecked")
+		// List<BorneElectrique> list =
+		// session.createCriteria(BorneElectrique.class).list();
+		// for (BorneElectrique borneElectrique : list) {
+		// borneElectrique.setCategory(instance);
+		// HibernateUtil.updateToHibernate(session, borneElectrique);
+		// }
 
-//		
-//		
-//		CategoryManager.getInstance().removeCategory(session, "BorneElectrique");
-//		
-//		
-//		System.out.println(instance.getCategoryName());
+		System.out.println("STOP");
+
+		// CategoryManager.getInstance().addCategory(session, "3");
+		// CategoryManager.getInstance().addCategory(session, "1");
+		// Category instance =
+		// CategoryManager.getInstance().addCategory(session,
+		// "BorneElectrique");
+		int value = CategoryManager.getInstance().removeCategory(session, "1");
+		// generateBorneElectrique(session);
+		System.out.println(value);
+		// CategoryManager.getInstance().removeCategory(session,
+		// "BorneElectrique");
+		// System.out.println(instance.getCategoryName());
 		session.close();
 	}
 

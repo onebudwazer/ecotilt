@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import fr.ecotilt.appui.util.UserUtil;
+import fr.ecotilt.appui.util.UserManager;
 
 @Entity
 @Table(name = "USER")
@@ -100,7 +100,7 @@ public class User {
 	}
 	
 	public static void main(String[] args) {
-		User instanceUser = new User("Johan", UserUtil.getInstance().hashPassword("p@ssword").toString());
+		User instanceUser = new User("Johan", UserManager.getInstance().hashPassword("p@ssword").toString());
 		
 		try {
 			Thread.sleep(1000);
@@ -108,7 +108,7 @@ public class User {
 			e.printStackTrace();
 		}
 		
-		User instanceOther = new User("johan",  UserUtil.getInstance().hashPassword("p@ssword").toString());
+		User instanceOther = new User("johan",  UserManager.getInstance().hashPassword("p@ssword").toString());
 		
 		System.out.println(instanceOther.equals(instanceUser));
 		System.out.println(instanceUser);

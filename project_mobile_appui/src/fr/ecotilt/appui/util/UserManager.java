@@ -9,16 +9,16 @@ import java.security.NoSuchAlgorithmException;
  * Singleton Utils for USERS
  * @author Philippe
  */
-public class UserUtil {
+public class UserManager {
 
-	private UserUtil() {
+	private UserManager() {
 	}
 	
 	private static class LazySingleton {
-		static UserUtil	instance = new UserUtil();
+		static UserManager	instance = new UserManager();
 	}
 
-	public static UserUtil getInstance() {
+	public static UserManager getInstance() {
 		return LazySingleton.instance;
 	}
 	
@@ -49,7 +49,7 @@ public class UserUtil {
 
 	public static void main(String[] args) {
 		System.out.println("*******************************************");
-		StringBuffer hexString = UserUtil.getInstance().hashPassword("040504740dsq80c44dsq0c5ds4s");
+		StringBuffer hexString = UserManager.getInstance().hashPassword("040504740dsq80c44dsq0c5ds4s");
 		System.out.println("Hex format : " + hexString.toString());
 	}
 }

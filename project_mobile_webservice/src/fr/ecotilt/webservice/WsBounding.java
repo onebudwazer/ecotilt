@@ -16,7 +16,7 @@ import org.hibernate.Session;
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
 import fr.ecotilt.appui.model.GeoCoord;
 import fr.ecotilt.appui.model.Pompe;
-import fr.ecotilt.appui.util.MapUtil;
+import fr.ecotilt.appui.util.MapManager;
 import fr.ecotilt.webservice.util.WebServiceConfig;
 
 /**
@@ -57,7 +57,7 @@ public class WsBounding extends HttpServlet {
 			Pompe instancePompe = result.get(i);
 			System.out.println(instancePompe.getGeoCoord());
 			
-			boolean value = MapUtil.getInstance().distFrom2points(myLoc, instancePompe.getGeoCoord());
+			boolean value = MapManager.getInstance().distFrom2points(myLoc, instancePompe.getGeoCoord());
 			System.out.println(value);
 			if (value) {
 				resultPompe.add(instancePompe);

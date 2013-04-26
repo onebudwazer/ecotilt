@@ -17,7 +17,7 @@ import org.hibernate.Session;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
 import fr.ecotilt.appui.model.Pompe;
-import fr.ecotilt.appui.util.JsonApi;
+import fr.ecotilt.appui.util.JsonManager;
 
 /**
  * Webservice xt data
@@ -102,7 +102,7 @@ public class Webservice extends HttpServlet {
 			
 			System.out.println(result);
 			
-			String responseJson = JsonApi.JacksonObjectToJson(result);
+			String responseJson = JsonManager.JacksonObjectToJson(result);
 			response.getWriter().write(responseJson);
 			session.close();
 		}

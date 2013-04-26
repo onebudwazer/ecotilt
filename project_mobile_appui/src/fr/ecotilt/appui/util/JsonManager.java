@@ -5,12 +5,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 /**
- * Static class to call Jackson API
- * 
+ * Jackson API manager
  * @author Philippe
  */
-public class JsonApi {
+public class JsonManager {
 
+	private JsonManager() {
+	}
+	
+	private static class LazySingleton {
+		static JsonManager	instance = new JsonManager();
+	}
+
+	public static JsonManager getInstance() {
+		return LazySingleton.instance;
+	}
+	
 	public static String JacksonObjectToJson(Object obj) {
 		ObjectMapper mapper = new ObjectMapper();
 		String json;

@@ -6,25 +6,22 @@ import fr.geodesy.GeodeticCalculator;
 import fr.geodesy.GlobalPosition;
 
 /**
- * Classe qui regroupe 
- * les outils pour du calcul carto
+ * Classe qui regroupe les outils pour du calcul carto
+ * 
  * @author Philippe
  */
-public class MapUtil {
+public class MapManager {
 
 	private double	DISTANCE_AREA	= 3000;
 
-	/**
-	 * constructeur prive explicite
-	 */
-	private MapUtil() {
+	private MapManager() {
 	}
 
 	private static class LazySingleton {
-		private static MapUtil	instance	= new MapUtil();
+		private static MapManager	instance	= new MapManager();
 	}
 
-	public static MapUtil getInstance() {
+	public static MapManager getInstance() {
 		return LazySingleton.instance;
 	}
 
@@ -35,7 +32,7 @@ public class MapUtil {
 	public double getDistanceArea() {
 		return DISTANCE_AREA;
 	}
-	
+
 	public boolean distFrom2points(GeoCoord myLocation, GeoCoord pointRef) {
 		// ma position geo
 		GlobalPosition pointA = new GlobalPosition(myLocation.getLatitude(),
@@ -65,7 +62,7 @@ public class MapUtil {
 		System.out.println(myLoc.toString());
 		System.out.println(obj2.toString());
 
-		boolean value = MapUtil.getInstance().distFrom2points(myLoc, obj2);
+		boolean value = MapManager.getInstance().distFrom2points(myLoc, obj2);
 		System.out.println(value);
 	}
 

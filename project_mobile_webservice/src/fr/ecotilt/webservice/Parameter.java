@@ -17,7 +17,7 @@ import org.hibernate.Session;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
 import fr.ecotilt.appui.model.Pompe;
-import fr.ecotilt.appui.util.JsonApi;
+import fr.ecotilt.appui.util.JsonManager;
 
 /**
  * @author Philippe
@@ -80,7 +80,7 @@ public class Parameter extends HttpServlet {
 	private void showResult(HttpServletResponse response, Query query) throws IOException {
 		List<Pompe> result = (List<Pompe>) query.list();
 		if (result.size() != 0) {
-			String responseJson = JsonApi.JacksonObjectToJsonPrettyOutput(result);
+			String responseJson = JsonManager.JacksonObjectToJsonPrettyOutput(result);
 			response.getWriter().write(responseJson);
 		} else {
 			response.getWriter().write("none");
