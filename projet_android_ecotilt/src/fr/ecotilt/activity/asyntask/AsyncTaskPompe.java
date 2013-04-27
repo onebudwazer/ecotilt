@@ -26,22 +26,22 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 	
 	protected Long doInBackground(URL... urls) {
 		
-		String url = "http://192.168.1.74:8080/project_mobile_webservice/wspompe";
-		StringBuilder content = CallWebService.getInstance().getContent(url);
-		
-		ObjectMapper mapper = new ObjectMapper();
-		ArrayList<Pompe> membersWrapper;
-		try {
-			membersWrapper = mapper.readValue(content.toString(), new TypeReference<ArrayList<Pompe>>() {});
-			listPompe = membersWrapper;
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		for (int i = 0; i < 100 / 5; i++) {
+			StringBuilder content = CallWebService.getInstance().getContent("wspompe?p=" + i);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			ArrayList<Pompe> membersWrapper;
+			try {
+				membersWrapper = mapper.readValue(content.toString(), new TypeReference<ArrayList<Pompe>>() {});
+				listPompe.addAll(membersWrapper);
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
 		return null;
 	}
 
