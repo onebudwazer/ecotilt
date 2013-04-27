@@ -9,12 +9,12 @@ import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import fr.ecotilt.activity.asyntask.AsyncTaskPompe;
-import fr.ecotilt.activity.asyntask.OnTaskCompleted;
+import fr.ecotilt.activity.asyntask.ITaskCompletedPompe;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.rsc.R;
 
 public class ElectriqueBorneActivity extends Activity implements
-		OnTaskCompleted {
+		ITaskCompletedPompe {
 
 	private ArrayList<String>		valuesUi	= new ArrayList<String>();
 

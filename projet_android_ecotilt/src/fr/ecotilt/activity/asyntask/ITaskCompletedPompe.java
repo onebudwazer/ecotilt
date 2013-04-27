@@ -4,6 +4,6 @@ import java.util.List;
 
 import fr.ecotilt.appui.model.Pompe;
 
-public interface OnTaskCompleted {
+public interface ITaskCompletedPompe {
 	void onTaskCompleted(List<Pompe> listPompe);
 }
