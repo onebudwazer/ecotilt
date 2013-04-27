@@ -16,7 +16,7 @@ public class GenerateUser {
 	public static void main(String[] args) {
 		
 		//on cree des instances beans Users
-		User instanceTest = new User("test", UserManager.getInstance().hashPassword("test").toString());
+		User instanceTest = new User("johan", UserManager.getInstance().hashPassword("la bande à basile").toString());
 		User instanceMichele = new User("michel", UserManager.getInstance().hashPassword("michel").toString());
 		
 		

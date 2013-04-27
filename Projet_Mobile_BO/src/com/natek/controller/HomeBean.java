@@ -1,34 +1,34 @@
 package com.natek.controller;
 
-
-import fr.project.appui.model_v2.Categories;
-import fr.project.appui.model_v2.Category;
+import fr.ecotilt.appui.model.Category;
 
 public class HomeBean {
 
-	private Categories pCategories;
-	private Category pSelectedCategory;
-	
-	/*###############################################################################
-	 * 							Builders
-	 * ##############################################################################
-	 */
-	public HomeBean(){
-		pCategories = new Categories();
-		
-	}
-	
-	/*###############################################################################
-	 * 							Getters & Setters
-	 * ##############################################################################
-	 */
+	private Category	pSelectedCategory;
 
-	public Categories getCategories() {
-		return pCategories;
+	/*
+	 * ##########################################################################
+	 * ##### Builders
+	 * ###########################################################
+	 * ###################
+	 */
+	public HomeBean() {
+
 	}
 
-	public void setCategories(Categories categories) {
-		pCategories = categories;
+	/*
+	 * ##########################################################################
+	 * ##### Getters & Setters
+	 * ##################################################
+	 * ############################
+	 */
+
+	public Category getCategories() {
+		return pSelectedCategory;
+	}
+
+	public void setCategories(Category categories) {
+		pSelectedCategory = categories;
 	}
 
 	public Category getSelectedCategory() {
@@ -39,36 +39,38 @@ public class HomeBean {
 		pSelectedCategory = selectedCategory;
 	}
 
-	/*###############################################################################
-	 * 							Public methods
-	 * ##############################################################################
+	/*
+	 * ##########################################################################
+	 * ##### Public methods
+	 * #####################################################
+	 * #########################
 	 */
-	
-	public String newCategory(){
+
+	public String newCategory() {
 		pSelectedCategory = new Category();
 		return "newCategory";
 	}
-	
-	public String setCategory(){
+
+	public String setCategory() {
 		return "setCategory";
 	}
-	
-	public String backToHome(){
+
+	public String backToHome() {
 		return "backToHome";
 	}
-	
-	public String saveCategory(){
-		try{
-			System.out.println("application name: "+pSelectedCategory.getNom());
-			pCategories.getCategories().add(pSelectedCategory);
-			//TODO appeler la methode du buisness
+
+	public String saveCategory() {
+		try {
+			System.out.println("application name: "
+					+ pSelectedCategory.getCategoryName());
+			pSelectedCategory.getCategoryId();
+			// TODO appeler la methode du buisness
 			return "true";
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return "false";
 		}
-		
+
 	}
-	
+
 }

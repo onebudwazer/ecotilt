@@ -19,8 +19,9 @@ public class GeneratePoint {
 	public static void main(String[] args) throws URISyntaxException {
 		// call hibernate
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		// generateBorne(session);
-		// generateVelib(session);
+		generateBorne(session);
+		generateVelib(session);
+		generateBorneElectrique(session);
 		// Category instance =
 		// CategoryManager.getInstance().addCategory(session,
 		// "BorneElectrique");
@@ -32,16 +33,17 @@ public class GeneratePoint {
 		// HibernateUtil.updateToHibernate(session, borneElectrique);
 		// }
 
-		System.out.println("STOP");
+		// System.out.println("STOP");
 
 		// CategoryManager.getInstance().addCategory(session, "3");
 		// CategoryManager.getInstance().addCategory(session, "1");
 		// Category instance =
 		// CategoryManager.getInstance().addCategory(session,
 		// "BorneElectrique");
-		int value = CategoryManager.getInstance().removeCategory(session, "1");
+		// int value = CategoryManager.getInstance().removeCategory(session,
+		// "1");
 		// generateBorneElectrique(session);
-		System.out.println(value);
+		// System.out.println(value);
 		// CategoryManager.getInstance().removeCategory(session,
 		// "BorneElectrique");
 		// System.out.println(instance.getCategoryName());

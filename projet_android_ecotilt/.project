@@ -3,6 +3,7 @@
 	<name>project_android_ecotilt</name>
 	<comment></comment>
 	<projects>
+		<project>project_mobile_appui</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

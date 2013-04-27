@@ -21,8 +21,8 @@ import fr.ecotilt.appui.model.Count;
 import fr.ecotilt.appui.model.GeoCoord;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.appui.model.Velib;
-import fr.ecotilt.appui.util.JsonApi;
-import fr.ecotilt.appui.util.MapUtil;
+import fr.ecotilt.appui.util.JsonManager;
+import fr.ecotilt.appui.util.MapManager;
 
 /**
  * WebServiceConfig access with singleton for tomcat thread
@@ -75,7 +75,7 @@ public class WebServiceConfig {
 			int numberOfResult) throws IOException {
 		
 		if (numberOfResult != 0) {
-			String responseJson = JsonApi
+			String responseJson = JsonManager
 					.JacksonObjectToJsonPrettyOutput(result);
 			response.getWriter().write(responseJson);
 			log.info(responseJson);
@@ -137,7 +137,7 @@ public class WebServiceConfig {
 				latitude = Double.valueOf(value);
 			}
 			if (key.equals("d")) {
-				MapUtil.getInstance().setDistanceArea(Double.valueOf(value));
+				MapManager.getInstance().setDistanceArea(Double.valueOf(value));
 			}
 		}
 		
@@ -252,7 +252,7 @@ public class WebServiceConfig {
 				AGenericObject instanceObject = (AGenericObject) myList
 						.get(index);
 				GeoCoord refGeoCoord = instanceObject.getGeoCoord();
-				boolean value = MapUtil.getInstance()
+				boolean value = MapManager.getInstance()
 						.distFrom2points(myPosition, refGeoCoord);
 				if (value == true) {
 					newResult.add(instanceObject);
