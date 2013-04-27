@@ -37,8 +37,7 @@ public class ElectriqueBorneActivity extends Activity implements
 		final ListView listview = (ListView) findViewById(R.id.listview);
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, valuesUi);
-//		adapter = new StableArrayAdapter(ElectriqueBorneActivity.this,
-//				android.R.layout.simple_list_item_1, valuesUi);
+		// adapter = new StableArrayAdapter(ElectriqueBorneActivity.this,
 		listview.setAdapter(adapter);
 	}
 
@@ -50,27 +49,4 @@ public class ElectriqueBorneActivity extends Activity implements
 		adapter.notifyDataSetChanged();
 	}
 
-//	private class StableArrayAdapter extends ArrayAdapter<String> {
-//
-//		HashMap<String, Integer>	mIdMap	= new HashMap<String, Integer>();
-//
-//		public StableArrayAdapter(Context context, int textViewResourceId,
-//				List<String> objects) {
-//			super(context, textViewResourceId, objects);
-//			for (int i = 0; i < objects.size(); ++i) {
-//				mIdMap.put(objects.get(i), i);
-//			}
-//		}
-//
-//		@Override
-//		public long getItemId(int position) {
-//			String item = getItem(position);
-//			return mIdMap.get(item);
-//		}
-//
-//		@Override
-//		public boolean hasStableIds() {
-//			return true;
-//		}
-//	}
 }
