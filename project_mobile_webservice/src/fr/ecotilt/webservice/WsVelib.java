@@ -58,8 +58,6 @@ public class WsVelib extends HttpServlet {
 		
 		//on ferme la session 
 		session.close();	
-		System.out.println(finalResult.get(0).getDate().toString());
-		
 	}
 	
 }
