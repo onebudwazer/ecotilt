@@ -44,7 +44,7 @@ public class ElectriqueBorneActivity extends Activity implements
 	@Override
 	public void onTaskCompleted(List<Pompe> listPompe) {
 		for (Pompe pompe : listPompe) {
-			valuesUi.add(pompe.getName());
+			valuesUi.add(pompe.getGeoCoord().toString());
 		}
 		adapter.notifyDataSetChanged();
 	}
