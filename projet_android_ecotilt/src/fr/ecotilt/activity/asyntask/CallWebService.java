@@ -23,7 +23,7 @@ import fr.ecotilt.appui.model.Count;
 
 public class CallWebService {
 
-	private static String URL_HTTP = "http://natek2.no-ip.org:8080/project_mobile_webserviceA/";
+	private static String URL_HTTP = "http://natek2.no-ip.org:8080/project_mobile_webservice/";
 	
 	private CallWebService() {
 	}
