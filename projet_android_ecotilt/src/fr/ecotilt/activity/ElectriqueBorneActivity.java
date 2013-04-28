@@ -1,24 +1,35 @@
 package fr.ecotilt.activity;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import fr.ecotilt.activity.asyntask.AsyncTaskPompe;
 import fr.ecotilt.activity.asyntask.ITaskCompletedPompe;
+import fr.ecotilt.activity.asyntask.StaticUri;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.rsc.R;
 
+import android.os.AsyncTask;
+
 public class ElectriqueBorneActivity extends Activity implements
-		ITaskCompletedPompe {
+		ITaskCompletedPompe, OnScrollListener {
 
 	private ArrayList<String>		valuesUi	= new ArrayList<String>();
 
 	private ArrayAdapter<String>	adapter;
+	
+	private boolean isloading = false;
+	
+	private AsyncTaskPompe atPompe = new AsyncTaskPompe(this);
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -31,10 +42,17 @@ public class ElectriqueBorneActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_electrique_borne);
-		AsyncTaskPompe atPompe = new AsyncTaskPompe(this);
-		atPompe.execute();
+		
+		try {
+			URL[] url = new URL[]{ new URL(StaticUri.URL_HTTP + "wspompe?p=0")};
+			atPompe.execute(url);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
 
 		final ListView listview = (ListView) findViewById(R.id.listview);
+		listview.setOnScrollListener(this);
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, valuesUi);
 		// adapter = new StableArrayAdapter(ElectriqueBorneActivity.this,
@@ -48,5 +66,30 @@ public class ElectriqueBorneActivity extends Activity implements
 		}
 		adapter.notifyDataSetChanged();
 	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+
+		int loadedItems = firstVisibleItem + visibleItemCount;
+		if((loadedItems == totalItemCount) && !isloading){
+			if(atPompe != null && (atPompe.getStatus() == AsyncTask.Status.FINISHED)){
+				atPompe = new AsyncTaskPompe(this);
+				try {
+					URL[] url = new URL[]{ new URL(StaticUri.URL_HTTP + "wspompe?p=1")};
+					atPompe.execute(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+	}
+
 
 }

@@ -23,8 +23,6 @@ import fr.ecotilt.appui.model.Count;
 
 public class CallWebService {
 
-	private static String URL_HTTP = "http://natek2.no-ip.org:8080/project_mobile_webservice/";
-	
 	private CallWebService() {
 	}
 
@@ -39,7 +37,7 @@ public class CallWebService {
 	public StringBuilder getContent(String url) {
 		StringBuilder builder = new StringBuilder();
 		HttpClient client = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(URL_HTTP + url);
+		HttpGet httpGet = new HttpGet(url);
 		// "http://192.168.1.74:8080/project_mobile_webservice/wspompe");
 		try {
 			HttpResponse response = client.execute(httpGet);
@@ -68,9 +66,9 @@ public class CallWebService {
 		return null;
 	}
 	
-	public long getCountPompe() {
-		StringBuilder content = getContent(URL_HTTP + "/wscount?c=pompe");
-		
+	public long getCountPompe(String uri) {
+//		StringBuilder content = getContent(StaticUri.URL_HTTP + "/wscount?c=pompe");
+		StringBuilder content = getContent(uri);
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 //			Count count = mapper.readValue(content.toString(), Count.class);
