@@ -63,7 +63,7 @@ public class CallWebService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new StringBuilder();
 	}
 	
 	public long getCountPompe(String uri) {

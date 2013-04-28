@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import fr.ecotilt.activity.asyntask.AsyncTaskPompe;
 import fr.ecotilt.activity.asyntask.ITaskCompletedPompe;
 import fr.ecotilt.activity.asyntask.StaticUri;
@@ -28,6 +29,7 @@ public class ElectriqueBorneActivity extends Activity implements
 	private ArrayAdapter<String>	adapter;
 	
 	private int indexPage = 0;
+	private int limitPage = 5;
 	
 	private boolean isloading = false;
 	
@@ -73,17 +75,20 @@ public class ElectriqueBorneActivity extends Activity implements
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-
 		int loadedItems = firstVisibleItem + visibleItemCount;
+		
 		if((loadedItems == totalItemCount) && !isloading){
 			if(atPompe != null && (atPompe.getStatus() == AsyncTask.Status.FINISHED)){
-				atPompe = new AsyncTaskPompe(this);
-				try {
-					indexPage++;
-					URL[] url = new URL[]{ new URL(StaticUri.URL_HTTP + "wspompe?p=" + indexPage)};
-					atPompe.execute(url);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
+				if (indexPage <= limitPage) {
+					atPompe = new AsyncTaskPompe(this);
+					try {
+						indexPage++;
+						URL[] url = new URL[] { new URL(StaticUri.URL_HTTP
+								+ "wspompe?p=" + indexPage) };
+						atPompe.execute(url);
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+					}
 				}
 				
 			}
@@ -93,6 +98,11 @@ public class ElectriqueBorneActivity extends Activity implements
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
+	}
+
+	@Override
+	public void onTaskError(String error) {
+		Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
 	}
 
 
