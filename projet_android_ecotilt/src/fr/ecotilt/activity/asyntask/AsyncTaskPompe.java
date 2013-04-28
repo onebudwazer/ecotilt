@@ -23,8 +23,7 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 	
 	private String messageCallBack;
 	
-	private boolean authorizationAsyncTask = true;
-
+	
 	public AsyncTaskPompe(ITaskCompletedPompe listener) {
 		this.listener = listener;
 	}
@@ -42,7 +41,7 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 							new TypeReference<ArrayList<Pompe>>() {});
 				
 				listPompe.addAll(membersWrapper);
-				messageCallBack = "Chargement fini";
+				messageCallBack = "Chargement terminé";
 			} catch (JsonParseException e) {
 				Log.e("4001",e.toString());
 				messageCallBack = e.toString();
