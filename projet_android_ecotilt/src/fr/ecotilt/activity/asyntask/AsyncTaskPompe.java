@@ -26,8 +26,7 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 	
 	protected Long doInBackground(URL... urls) {
 		
-		for (int i = 0; i < 10 / 5; i++) {
-			StringBuilder content = CallWebService.getInstance().getContent("wspompe?p=" + i);
+			StringBuilder content = CallWebService.getInstance().getContent("wspompe?p=0");
 			
 			ObjectMapper mapper = new ObjectMapper();
 			ArrayList<Pompe> membersWrapper;
@@ -41,7 +40,6 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
 		return null;
 	}
 
