@@ -27,6 +27,8 @@ public class ElectriqueBorneActivity extends Activity implements
 
 	private ArrayAdapter<String>	adapter;
 	
+	private int indexPage = 0;
+	
 	private boolean isloading = false;
 	
 	private AsyncTaskPompe atPompe = new AsyncTaskPompe(this);
@@ -44,7 +46,8 @@ public class ElectriqueBorneActivity extends Activity implements
 		setContentView(R.layout.activity_electrique_borne);
 		
 		try {
-			URL[] url = new URL[]{ new URL(StaticUri.URL_HTTP + "wspompe?p=0")};
+			indexPage = 0;
+			URL[] url = new URL[]{ new URL(StaticUri.URL_HTTP + "wspompe?p=" + indexPage)};
 			atPompe.execute(url);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -62,7 +65,7 @@ public class ElectriqueBorneActivity extends Activity implements
 	@Override
 	public void onTaskCompleted(List<Pompe> listPompe) {
 		for (Pompe pompe : listPompe) {
-			valuesUi.add(pompe.getGeoCoord().toString());
+			valuesUi.add(pompe.toString());
 		}
 		adapter.notifyDataSetChanged();
 	}
@@ -76,7 +79,8 @@ public class ElectriqueBorneActivity extends Activity implements
 			if(atPompe != null && (atPompe.getStatus() == AsyncTask.Status.FINISHED)){
 				atPompe = new AsyncTaskPompe(this);
 				try {
-					URL[] url = new URL[]{ new URL(StaticUri.URL_HTTP + "wspompe?p=1")};
+					indexPage++;
+					URL[] url = new URL[]{ new URL(StaticUri.URL_HTTP + "wspompe?p=" + indexPage)};
 					atPompe.execute(url);
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
