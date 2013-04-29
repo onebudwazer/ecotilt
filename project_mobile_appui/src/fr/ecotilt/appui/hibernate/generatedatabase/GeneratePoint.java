@@ -10,7 +10,6 @@ import fr.ecotilt.appui.model.GeoCoord;
 import fr.ecotilt.appui.model.PictureEntity;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.appui.model.Velib;
-import fr.ecotilt.appui.util.CategoryManager;
 import fr.ecotilt.appui.util.ImageUtil;
 import fr.ecotilt.appui.util.RandomNumber;
 
