@@ -13,6 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
+import fr.ecotilt.appui.model.Count;
 import fr.ecotilt.appui.model.GeoCoord;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.webservice.util.WebServiceConfig;
@@ -58,7 +59,11 @@ public class WsPompe extends HttpServlet {
 		List<Pompe> finalResult = (List<Pompe>) WebServiceConfig.getInstance().setMyPositionGeo(myPosition, result);
 		
 		//reponse
-		WebServiceConfig.getInstance().setReponseHttp(response, finalResult, finalResult.size());
+		if(request.getParameter("c") != null) {
+			WebServiceConfig.getInstance().setReponseHttp(response, new Count(finalResult.size()), finalResult.size());
+		} else {
+			WebServiceConfig.getInstance().setReponseHttp(response, finalResult, finalResult.size());
+		}
 		
 		//on ferme la session 
 		session.close();

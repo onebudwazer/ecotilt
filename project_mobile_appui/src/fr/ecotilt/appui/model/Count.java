@@ -14,6 +14,16 @@ public class Count {
 	public Count() {
 	}
 	
+	public Count(long value) {
+		this.value = value;
+		
+		if (value == -1) {
+			statut = "error";
+		} else {
+			statut = "valid";
+		}
+	}
+	
 	public void setValue(long value) {
 		this.value = value;
 		
