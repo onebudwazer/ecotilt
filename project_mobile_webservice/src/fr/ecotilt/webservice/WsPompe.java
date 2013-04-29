@@ -33,8 +33,7 @@ public class WsPompe extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		// on configure l'entete http
-		WebServiceConfig.getInstance().doConfigure(response);
+		
 		
 		//recupere l'ensemble des parametres
 		Map<String, String> queryParameters = WebServiceConfig.getInstance()
