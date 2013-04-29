@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
@@ -32,17 +32,17 @@ public class WsVelib extends HttpServlet {
 		WebServiceConfig.getInstance().doConfigure(response);
 		
 		//recupere l'ensemble des parametres
-		Map<String, String> queryParameters = WebServiceConfig.getInstance()
-											  .parametersManager(request);
+		Map<String, String> listParameters = WebServiceConfig.getInstance()
+											  .getAllParametersFromServlet(request);
 		
 		//ouverture d'une session hibernate
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
 		//construit une requete hibernate
-		Query requete = WebServiceConfig.getInstance().queryConstructor(session, queryParameters, "from Velib ");
+		Criteria criteria = WebServiceConfig.getInstance().queryConstructor(session, listParameters, Velib.class);
 		
 		//on configure la requete (active cache)
-		Query requeteFinal =  WebServiceConfig.getInstance().queryConfiguration(requete);
+		Criteria requeteFinal =  WebServiceConfig.getInstance().queryConfiguration(criteria);
 
 		//on remonte les donnees
 		List<Velib> result = (List<Velib>) requeteFinal.list();

@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
-import fr.ecotilt.appui.model.Count;
 import fr.ecotilt.appui.model.GeoCoord;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.webservice.util.WebServiceConfig;
 
 /**
  * WsPompe
+ * 
  * @author Philippe
  */
 public class WsPompe extends HttpServlet {
@@ -29,42 +29,41 @@ public class WsPompe extends HttpServlet {
 	 */
 	private static final long	serialVersionUID	= 5570405722726682764L;
 
-	@SuppressWarnings("unchecked")
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
-		
-		//recupere l'ensemble des parametres
-		Map<String, String> queryParameters = WebServiceConfig.getInstance()
-											  .parametersManager(request);
-		
-		//ouverture d'une session hibernate
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		
-		//construit une requete hibernate
-		Query requete = WebServiceConfig.getInstance().queryConstructor(session, queryParameters, "from Pompe ");
-		
-		//on configure la requete (active cache)
-		Query requeteFinal =  WebServiceConfig.getInstance().queryConfiguration(requete);
+		// on configure l'entete http
+		WebServiceConfig.getInstance().doConfigure(response);
 
-		//on remonte les donnees
+		// //recupere l'ensemble des parametres
+		Map<String, String> listParameters = WebServiceConfig.getInstance()
+				.getAllParametersFromServlet(request);
+
+		// ouverture d'une session hibernate
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Criteria criteria = WebServiceConfig.getInstance().queryConstructor(
+				session, listParameters, Pompe.class);
+
+		Criteria requeteFinal = WebServiceConfig.getInstance()
+				.queryConfiguration(criteria);
+
+		// on remonte les donnees
+		@SuppressWarnings("unchecked")
 		List<Pompe> result = (List<Pompe>) requeteFinal.list();
+
+		// //on definie une position la position si elle existe
+		GeoCoord myPosition = WebServiceConfig.getInstance()
+				.defineMypositionGeo(request);
+
+		@SuppressWarnings("unchecked")
+		List<Pompe> finalResult = (List<Pompe>) WebServiceConfig.getInstance()
+				.setMyPositionGeo(myPosition, result);
+
+		WebServiceConfig.getInstance().setReponseHttp(response, finalResult,
+				finalResult.size());
 		
-		//on definie une position la position si elle existe
-		GeoCoord myPosition = WebServiceConfig.getInstance().defineMypositionGeo(request);
-		
-		//
-		List<Pompe> finalResult = (List<Pompe>) WebServiceConfig.getInstance().setMyPositionGeo(myPosition, result);
-		
-		//reponse
-		if(request.getParameter("c") != null) {
-			WebServiceConfig.getInstance().setReponseHttp(response, new Count(finalResult.size()), finalResult.size());
-		} else {
-			WebServiceConfig.getInstance().setReponseHttp(response, finalResult, finalResult.size());
-		}
-		
-		//on ferme la session 
+		// on ferme la session
 		session.close();
 	}
 }
+

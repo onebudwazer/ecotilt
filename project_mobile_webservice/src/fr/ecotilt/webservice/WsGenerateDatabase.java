@@ -45,7 +45,7 @@ public class WsGenerateDatabase extends HttpServlet {
 			 GeneratePoint.generateVelib(session);
 			 WebServiceConfig.getInstance().setReponseHttp(response, "Generation de la base...");
 		} else {
-			WebServiceConfig.getInstance().setReponseHttp(response, "Generation de la base...déjà fait");
+			WebServiceConfig.getInstance().setReponseHttp(response, "Erreur, Generation de la base...déjà fait");
 		}
 
 		session.close();

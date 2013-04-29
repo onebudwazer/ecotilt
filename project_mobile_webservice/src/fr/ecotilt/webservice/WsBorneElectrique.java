@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
@@ -19,6 +19,7 @@ import fr.ecotilt.webservice.util.WebServiceConfig;
 
 /**
  * BorneElectrique
+ * 
  * @author Philippe
  */
 public class WsBorneElectrique extends HttpServlet {
@@ -31,36 +32,42 @@ public class WsBorneElectrique extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// on configure l'entete http
 		WebServiceConfig.getInstance().doConfigure(response);
-		
-		//recupere l'ensemble des parametres
-		Map<String, String> queryParameters = WebServiceConfig.getInstance()
-											  .parametersManager(request);
-		
-		//ouverture d'une session hibernate
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		
-		//construit une requete hibernate
-		Query requete = WebServiceConfig.getInstance().queryConstructor(session, queryParameters, "from BorneElectrique ");
-		
-		//on configure la requete (active cache)
-		Query requeteFinal =  WebServiceConfig.getInstance().queryConfiguration(requete);
 
-		//on remonte les donnees
-		List<BorneElectrique> result = (List<BorneElectrique>) requeteFinal.list();
-		
-		//on definie une position la position si elle existe
-		GeoCoord myPosition = WebServiceConfig.getInstance().defineMypositionGeo(request);
-		
+		// recupere l'ensemble des parametres
+		Map<String, String> queryParameters = WebServiceConfig.getInstance()
+				.getAllParametersFromServlet(request);
+
+		// ouverture d'une session hibernate
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		// construit une requete hibernate
+		Criteria criteria = WebServiceConfig.getInstance().queryConstructor(
+				session, queryParameters, BorneElectrique.class);
+
+		// on configure la requete (active cache)
+		Criteria requeteFinal = WebServiceConfig.getInstance()
+				.queryConfiguration(criteria);
+
+		// on remonte les donnees
+		List<BorneElectrique> result = (List<BorneElectrique>) requeteFinal
+				.list();
+
+		// on definie une position la position si elle existe
+		GeoCoord myPosition = WebServiceConfig.getInstance()
+				.defineMypositionGeo(request);
+
 		//
-		List<BorneElectrique> finalResult = (List<BorneElectrique>) WebServiceConfig.getInstance().setMyPositionGeo(myPosition, result);
-		
-		//reponse
-		WebServiceConfig.getInstance().setReponseHttp(response, finalResult, finalResult.size());
-		
-		//on ferme la session 
+		List<BorneElectrique> finalResult = (List<BorneElectrique>) WebServiceConfig
+				.getInstance().setMyPositionGeo(myPosition, result);
+
+		// reponse
+		WebServiceConfig.getInstance().setReponseHttp(response, finalResult,
+				finalResult.size());
+
+		// on ferme la session
 		session.close();
 	}
 }
