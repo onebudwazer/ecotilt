@@ -64,20 +64,20 @@ public class GeneratePoint {
 	}
 
 	public static void generateBorneElectrique(Session session) {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			ImageUtil instance = new ImageUtil("2013.jpg");
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();
 			pe.setImage(bInstanceImg);
 			HibernateUtil.saveToHibernate(session, new BorneElectrique("Pompe "
-					+ i, "Toulon", RandomNumber.getRandomInt(99999),
+					+ i, "Marseille", RandomNumber.getRandomInt(99999),
 					new GeoCoord(RandomNumber.randomAreaMarseilleLatitude(),
 							RandomNumber.randomAreaMarseilleLongitude()), pe));
 		}
 	}
 
 	public static void generateVelib(Session session) {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			ImageUtil instance = new ImageUtil("2013.jpg");
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();
