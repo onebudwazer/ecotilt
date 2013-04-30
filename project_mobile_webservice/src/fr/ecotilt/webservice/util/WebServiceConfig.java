@@ -75,14 +75,24 @@ public class WebServiceConfig {
 	 * @throws IOException
 	 */
 	public void setReponseHttp(HttpServletResponse response, Object result,
-			int numberOfResult) throws IOException {
+			int numberOfResult) {
 
 		if (numberOfResult != 0) {
 			String responseJson = JsonManager
 					.JacksonObjectToJsonPrettyOutput(result);
-			response.getWriter().write(responseJson);
+			try {
+				response.getWriter().write(responseJson);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		} else {
-			response.getWriter().write("Unsupported get request");
+
+			try {
+				response.getWriter().write("Unsupported get request");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -91,12 +101,20 @@ public class WebServiceConfig {
 		this.setReponseHttp(response, result, 1);
 	}
 
+	public Map<String, String> doConfigureServlet(HttpServletRequest request,
+			HttpServletResponse response) {
+		// on configure l'entete http
+		doConfigure(response);
+		//recupere l'ensemble des parametres
+		return getAllParametersFromServlet(request);
+	}
+
 	/**
 	 * defini l'entete du request http json
 	 * 
 	 * @param response
 	 */
-	public void doConfigure(HttpServletResponse response) {
+	private void doConfigure(HttpServletResponse response) {
 		// on défini l'entete
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
@@ -109,7 +127,7 @@ public class WebServiceConfig {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map<String, String> getAllParametersFromServlet(
+	private Map<String, String> getAllParametersFromServlet(
 			HttpServletRequest request) {
 		// on commence par creer la requete
 		Map params = request.getParameterMap();
@@ -229,10 +247,10 @@ public class WebServiceConfig {
 				if (cle.equals("cp")) {
 					criteria.add(Restrictions.like("codePostal", valeur));
 				}
-				if (cle.equals("c") && valeur.equals("count")) {
-					criteria.setProjection(Projections.rowCount())
-							.uniqueResult();
-				}
+				// if (cle.equals("c") && valeur.equals("count")) {
+				// criteria.setProjection(Projections.rowCount())
+				// .uniqueResult();
+				// }
 			}
 		}
 
