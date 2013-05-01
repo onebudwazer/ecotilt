@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
 import fr.ecotilt.appui.model.BorneElectrique;
@@ -29,7 +30,7 @@ public class BorneElectriqueQuery implements IStrategy {
 		// construit une requete hibernate
 		Criteria criteria = WebServiceConfig.getInstance().queryConstructor(
 				session, listParameters, BorneElectrique.class);
-
+		criteria.addOrder(Order.asc("id"));
 		// on configure la requete (active cache)
 		Criteria requeteFinal = WebServiceConfig.getInstance()
 				.queryConfiguration(criteria);

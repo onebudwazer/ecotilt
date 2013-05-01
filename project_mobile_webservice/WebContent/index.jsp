@@ -8,6 +8,6 @@
 <title>Ecotilt API</title>
 </head>
 <body>
-	<h1>Ecotilt API</h1>
+	<h1>Ecotilt API v2.0</h1>
 </body>
 </html>

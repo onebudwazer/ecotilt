@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 
 import fr.ecotilt.appui.hibernate.conf.HibernateUtil;
 import fr.ecotilt.appui.model.GeoCoord;
@@ -27,7 +28,8 @@ public class PompeQuery implements IStrategy {
 
 		Criteria criteria = WebServiceConfig.getInstance().queryConstructor(
 				session, listParameters, Pompe.class);
-
+		criteria.addOrder(Order.asc("id"));
+		
 		Criteria requeteFinal = WebServiceConfig.getInstance()
 				.queryConfiguration(criteria);
 
