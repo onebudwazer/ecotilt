@@ -26,6 +26,11 @@ public abstract class BaseActivity extends Activity {
 				Intent intent = new Intent(BaseActivity.this, UserSettingActivity.class);
 	        	startActivity(intent);
 				return true;
+				
+			case R.id.action_maps:
+				Intent i = new Intent(BaseActivity.this, CartoActivity.class);
+	        	startActivity(i);
+				return true;
 			default:
 				return false;
 		}

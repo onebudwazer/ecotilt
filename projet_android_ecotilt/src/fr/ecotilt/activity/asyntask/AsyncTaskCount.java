@@ -27,12 +27,11 @@ public class AsyncTaskCount extends AsyncTask<URL, Integer, Long> {
 
 		int count = urls.length;
 		for (int i = 0; i < count; i++) {
-			StringBuilder content = CallWebService.getInstance().getContent(
+			String content = CallWebService.getInstance().getContent(
 					urls[i].toString());
 			ObjectMapper mapper = new ObjectMapper();
 			try {
-				callBackCount = mapper.readValue(content.toString(),
-						Count.class);
+				callBackCount = mapper.readValue(content, Count.class);
 			} catch (JsonParseException e) {
 				Log.e("4001", e.toString());
 			} catch (JsonMappingException e) {

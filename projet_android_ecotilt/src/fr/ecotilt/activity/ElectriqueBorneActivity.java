@@ -32,12 +32,6 @@ public class ElectriqueBorneActivity extends BaseActivity implements
 	private boolean					isloading	= false;
 	private AsyncTaskPompe			atPompe		= new AsyncTaskPompe(this);
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		getMenuInflater().inflate(R.menu.electrique_borne, menu);
-//		return true;
-//	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -125,9 +119,11 @@ public class ElectriqueBorneActivity extends BaseActivity implements
 
 	@Override
 	public void onTaskCompleted(Count count) {
-		long nbrElement = count.getValue();
-		double calculNbrPage = Math.ceil(nbrElement / 5.0);
-		limitPage = (int) calculNbrPage;
+		if (count != null) {
+			long nbrElement = count.getValue();
+			double calculNbrPage = Math.ceil(nbrElement / 5.0);
+			limitPage = (int) calculNbrPage;
+		}
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 	public AsyncTaskPompe(ITaskCompletedPompe listener) {
 		this.listener = listener;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
 		this.listener.onPreExecute();
@@ -36,14 +36,13 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 
 		int count = urls.length;
 		for (int i = 0; i < count; i++) {
-			StringBuilder content = CallWebService.getInstance().getContent(
+			String content = CallWebService.getInstance().getContent(
 					urls[i].toString());
 			ObjectMapper mapper = new ObjectMapper();
 			ArrayList<Pompe> membersWrapper;
 			try {
-				membersWrapper = mapper.readValue(content.toString(),
-						new TypeReference<ArrayList<Pompe>>() {
-						});
+				membersWrapper = mapper.readValue(content,
+						new TypeReference<ArrayList<Pompe>>() {});
 
 				listPompe.addAll(membersWrapper);
 				messageCallBack = "Chargement terminé";

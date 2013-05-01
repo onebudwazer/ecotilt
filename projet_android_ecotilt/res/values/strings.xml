@@ -6,6 +6,7 @@
     <!-- Activity titles -->
     <string name="title_activity_electrique_borne">ElectriqueBorneActivity</string>
     <string name="title_activity_user_settings">Paramètres utilisateur</string>
+    <string name="title_activity_maps">Carte</string>
     <!-- Labels -->
     <string name="menu_item_clear_memory_cache">Clear memory cache</string>
     <string name="menu_item_clear_disc_cache">Clear disc cache</string>

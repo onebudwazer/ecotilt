@@ -1,16 +1,22 @@
 package fr.ecotilt.activity;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
+import fr.ecotilt.activity.asyntask.CallWebService;
+import fr.ecotilt.gps.PositionService;
 import fr.ecotilt.rsc.R;
 
 public class MainActivity extends BaseActivity {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +32,13 @@ public class MainActivity extends BaseActivity {
 						position + " " + id, Toast.LENGTH_SHORT).show();
 	        }
 	    });
+	    
+	    
+	    CallWebService.getInstance().checkConnectivity(this);
+	    
+	    
+	    Intent bindIntent = new Intent(MainActivity.this, PositionService.class);
+	    startService(bindIntent);
 	}
 
 }

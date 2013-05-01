@@ -1,7 +1,14 @@
 package fr.ecotilt.appui.model;
 
+import java.io.Serializable;
 
-public class GeoCoord {
+
+public class GeoCoord implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long	serialVersionUID	= -3242482947496773453L;
 
 	private long geoCoordId;
 	

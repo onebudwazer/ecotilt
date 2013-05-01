@@ -13,13 +13,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import fr.ecotilt.appui.model.Count;
+import android.widget.Toast;
 
 public class CallWebService {
 
@@ -34,7 +32,7 @@ public class CallWebService {
 		return LazySingleton.instance;
 	}
 
-	public StringBuilder getContent(String url) {
+	public String getContent(String url) {
 		StringBuilder builder = new StringBuilder();
 		HttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(url);
@@ -53,40 +51,39 @@ public class CallWebService {
 				while ((line = reader.readLine()) != null) {
 					builder.append(line);
 				}
-				
-				return builder;
+
+				return builder.toString();
 			} else {
-				Log.e("Erreur Lecture du flux json", "");
+				Log.e("Erreur Lecture du flux json", String.valueOf(statusCode));
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new StringBuilder();
+		return new StringBuilder().toString();
 	}
-	
-	public long getCountPompe(String uri) {
-//		StringBuilder content = getContent(StaticUri.URL_HTTP + "/wscount?c=pompe");
-		StringBuilder content = getContent(uri);
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-//			Count count = mapper.readValue(content.toString(), Count.class);
-			Count membersWrapper = mapper.readValue(content.toString(), new Count().getClass());
-			if (membersWrapper.getStatut().equals("valid")) {
-				return membersWrapper.getValue();
-			} else {
-				return -1;
-			}
-			
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+	private boolean isOnline(Context context) {
+		ConnectivityManager cm = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+			return true;
 		}
-		return -1;
+		return false;
+	}
+
+	public boolean checkConnectivity(Context context) {
+		boolean value = isOnline(context);
+		if (value) {
+			Toast.makeText(context, "connection internet", Toast.LENGTH_SHORT)
+					.show();
+		} else {
+			Toast.makeText(context, "Vous avez besoin d'internet",
+					Toast.LENGTH_SHORT).show();
+		}
+		return value;
 	}
 
 }
