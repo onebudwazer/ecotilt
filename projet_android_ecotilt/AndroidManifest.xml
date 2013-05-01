@@ -68,11 +68,11 @@
             android:label="@string/title_activity_user_settings"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="fr.ecotilt.activity.CartoActivity"
-            android:label="@string/title_activity_user_settings"
-            android:screenOrientation="portrait" >
-        </activity>
+<!--         <activity -->
+<!--             android:name="fr.ecotilt.activity.CartoActivity" -->
+<!--             android:label="@string/title_activity_user_settings" -->
+<!--             android:screenOrientation="portrait" > -->
+<!--         </activity> -->
         <service android:name="fr.ecotilt.gps.PositionService"/>
     </application>
 
