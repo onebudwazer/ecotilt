@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="#78fb8e" 
+        android:background="#78fb8e"
         android:divider="#b5b5b5"
         android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_selector">
+        android:listSelector="@drawable/list_selector" >
     </ListView>
 </LinearLayout>

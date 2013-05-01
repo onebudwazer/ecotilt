@@ -5,10 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -24,7 +22,7 @@ import fr.ecotilt.appui.model.Count;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.rsc.R;
 
-public class ElectriqueBorneActivity extends Activity implements
+public class ElectriqueBorneActivity extends BaseActivity implements
 		ITaskCompletedPompe, OnScrollListener, ITaskCompletedCount {
 
 	private ArrayList<String>		valuesUi	= new ArrayList<String>();
@@ -34,11 +32,11 @@ public class ElectriqueBorneActivity extends Activity implements
 	private boolean					isloading	= false;
 	private AsyncTaskPompe			atPompe		= new AsyncTaskPompe(this);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.electrique_borne, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.electrique_borne, menu);
+//		return true;
+//	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

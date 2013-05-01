@@ -1,31 +1,30 @@
 package fr.ecotilt.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import fr.ecotilt.rsc.R;
 
+/**
+ * Pour les gestion des menu
+ * @author Philippe
+ *
+ */
 public abstract class BaseActivity extends Activity {
-
-	protected ImageLoader imageLoader = ImageLoader.getInstance();
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main_menu, menu);
+		getMenuInflater().inflate(R.menu.menu_parameters, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.item_clear_memory_cache:
-				imageLoader.clearMemoryCache();
-				return true;
-			case R.id.item_clear_disc_cache:
-				imageLoader.clearDiscCache();
+			case R.id.action_settings:
+				Intent intent = new Intent(BaseActivity.this, UserSettingActivity.class);
+	        	startActivity(intent);
 				return true;
 			default:
 				return false;
