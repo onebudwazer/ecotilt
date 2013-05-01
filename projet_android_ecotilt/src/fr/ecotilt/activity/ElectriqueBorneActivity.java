@@ -29,14 +29,10 @@ public class ElectriqueBorneActivity extends Activity implements
 		ITaskCompletedPompe, OnScrollListener {
 
 	private ArrayList<String>		valuesUi	= new ArrayList<String>();
-
 	private ArrayAdapter<String>	adapter;
-	
 	private int indexPage = 0;
 	private int limitPage = 5;
-	
 	private boolean isloading = false;
-	
 	private AsyncTaskPompe atPompe = new AsyncTaskPompe(this);
 
 	@Override
@@ -50,7 +46,6 @@ public class ElectriqueBorneActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_electrique_borne);
-		
 		try {
 			indexPage = 0;
 			URL[] url = new URL[]{ new URL(StaticUri.URL_HTTP + "wspompe?p=" + indexPage)};
@@ -58,9 +53,6 @@ public class ElectriqueBorneActivity extends Activity implements
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
-		
-
 		final ListView listview = (ListView) findViewById(R.id.listview);
 		listview.setOnScrollListener(this);
 		
