@@ -20,12 +20,16 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 	private List<Pompe>			listPompe	= new ArrayList<Pompe>();
 
 	private ITaskCompletedPompe	listener;
-	
-	private String messageCallBack;
-	
-	
+
+	private String				messageCallBack;
+
 	public AsyncTaskPompe(ITaskCompletedPompe listener) {
 		this.listener = listener;
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		this.listener.onPreExecute();
 	}
 
 	protected Long doInBackground(URL... urls) {
@@ -33,23 +37,24 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 		int count = urls.length;
 		for (int i = 0; i < count; i++) {
 			StringBuilder content = CallWebService.getInstance().getContent(
-															urls[i].toString());
+					urls[i].toString());
 			ObjectMapper mapper = new ObjectMapper();
 			ArrayList<Pompe> membersWrapper;
 			try {
 				membersWrapper = mapper.readValue(content.toString(),
-							new TypeReference<ArrayList<Pompe>>() {});
-				
+						new TypeReference<ArrayList<Pompe>>() {
+						});
+
 				listPompe.addAll(membersWrapper);
 				messageCallBack = "Chargement terminé";
 			} catch (JsonParseException e) {
-				Log.e("4001",e.toString());
+				Log.e("4001", e.toString());
 				messageCallBack = e.toString();
 			} catch (JsonMappingException e) {
-				Log.e("4002",e.toString());
+				Log.e("4002", e.toString());
 				messageCallBack = e.toString();
 			} catch (IOException e) {
-				Log.e("4003",e.toString());
+				Log.e("4003", e.toString());
 				messageCallBack = e.toString();
 			}
 		}
