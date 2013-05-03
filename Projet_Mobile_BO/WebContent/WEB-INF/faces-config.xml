@@ -43,6 +43,10 @@
     		<to-view-id>/pages/categories/ModifyCategory.xhtml</to-view-id>
     	</navigation-case>
     	<navigation-case>
+    		<from-outcome>viewCategory</from-outcome>
+    		<to-view-id>/pages/item/Items.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
     		<from-outcome>erreur</from-outcome>
     		<to-view-id>/pages/erreur.xhtml</to-view-id>
     	</navigation-case>

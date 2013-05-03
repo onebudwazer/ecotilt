@@ -1,20 +1,27 @@
 package com.natek.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 
-import fr.project.appui.model_v2.Categories;
-import fr.project.appui.model_v2.Category;
+import fr.ecotilt.appui.model.AGenericObject;
+import fr.ecotilt.appui.model.Category;
+
+
+
 
 public class HomeBean {
 
-	private Categories pCategories;
+	private ArrayList<Category> pCategories;
 	private Category pSelectedCategory;
+	private List<AGenericObject> pitems;
+	private AGenericObject pSelectedItem;
 	
 	/*###############################################################################
 	 * 							Builders
 	 * ##############################################################################
 	 */
 	public HomeBean(){
-		pCategories = new Categories();
+		pCategories = new ArrayList<Category>();
 		
 	}
 	
@@ -23,11 +30,11 @@ public class HomeBean {
 	 * ##############################################################################
 	 */
 
-	public Categories getCategories() {
+	public ArrayList<Category> getCategories() {
 		return pCategories;
 	}
 
-	public void setCategories(Categories categories) {
+	public void setCategories(ArrayList<Category> categories) {
 		pCategories = categories;
 	}
 
@@ -38,29 +45,41 @@ public class HomeBean {
 	public void setSelectedCategory(Category selectedCategory) {
 		pSelectedCategory = selectedCategory;
 	}
+	
+	public List<AGenericObject> getItems() {
+		return pitems;
+	}
+
+	public void setItems(List<AGenericObject> items) {
+		pitems = items;
+	}
+
+	public AGenericObject getSelectedItem() {
+		return pSelectedItem;
+	}
+
+	public void setSelectedItem(AGenericObject pSelectedItem) {
+		this.pSelectedItem = pSelectedItem;
+	}
 
 	/*###############################################################################
 	 * 							Public methods
 	 * ##############################################################################
 	 */
 	
+	public String setCategory(){
+		return "setCategory";
+	}
+
 	public String newCategory(){
 		pSelectedCategory = new Category();
 		return "newCategory";
 	}
 	
-	public String setCategory(){
-		return "setCategory";
-	}
-	
-	public String backToHome(){
-		return "backToHome";
-	}
-	
 	public String saveCategory(){
 		try{
-			System.out.println("application name: "+pSelectedCategory.getNom());
-			pCategories.getCategories().add(pSelectedCategory);
+			System.out.println("categorie name: "+pSelectedCategory.getCategoryName());
+			pCategories.add(pSelectedCategory);
 			//TODO appeler la methode du buisness
 			return "true";
 		}
@@ -68,7 +87,27 @@ public class HomeBean {
 			e.printStackTrace();
 			return "false";
 		}
-		
+	}
+	
+	public String backToHome(){
+		return "backToHome";
+	}
+	
+	public String viewCategory(){
+		return "viewCategory";
+	}
+	
+	public String saveItem(){
+		try{
+			System.out.println("item name : "+pSelectedItem.getName());
+		pitems.add(pSelectedItem);
+		//TODO appeler la methode du business
+		return "true";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "false";
+		}
 	}
 	
 }

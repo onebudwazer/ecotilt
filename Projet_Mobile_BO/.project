@@ -3,7 +3,7 @@
 	<name>Projet_Mobile_BO</name>
 	<comment></comment>
 	<projects>
-		<project>project_mobile_appui_local</project>
+		<project>project_mobile_appui</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

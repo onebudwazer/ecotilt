@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+      <ui:include src="./modeles/head.xhtml"></ui:include>
+<body>
+
+	<ui:include src="./modeles/header.xhtml"></ui:include>
+
+<h:form>  
+    <p:dataTable var="item" value="#{homeBean.items}"
+    	rowKey="#{items.id}" selection="#{homeBean.selectedItem}">
+    	  
+    	<f:facet name="header">  
+            <h:outputLabel value="#{homeBean.selectedCategory.name}"/>        
+        </f:facet>
+        
+        <p:column selectionMode="single" style="align:center; width:20px">
+        	<h:selectOneRadio/>
+        </p:column>
+        
+        <p:column headerText="id">  
+            <h:outputText value="#{item.id}" />  
+        </p:column>  
+  
+        <p:column headerText="name">  
+            <h:outputText value="#{item.nom}" />  
+        </p:column> 
+        
+        <f:facet name="footer"></f:facet>
+    </p:dataTable>  
+    
+    <p:commandButton value="New" action="#{homeBean.newCategory}"/>
+    <p:commandButton value="Modify" action="#{homeBean.setCategory}"/>
+    
+</h:form> 
+</body>
+</html>
