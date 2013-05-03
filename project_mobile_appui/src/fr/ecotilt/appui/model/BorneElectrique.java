@@ -18,12 +18,11 @@ public class BorneElectrique extends AGenericObject {
 	public BorneElectrique() {
 	}
 
-	public BorneElectrique(String name, String city, int cp, GeoCoord gc, PictureEntity pe, Category category) {
+	public BorneElectrique(String name, String city, int cp, GeoCoord gc, PictureEntity pe) {
 		this.name = name;
 		this.gc = gc;
 		this.codePostal = cp;
 		this.city = city;
 		this.pe = pe;
-		this.category = category;
 	}
 }

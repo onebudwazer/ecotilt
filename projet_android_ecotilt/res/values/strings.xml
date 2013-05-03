@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Content descriptions -->
+    <string name="app_name">Ecotilt</string>
+    <!-- Activity titles -->
+    <string name="title_activity_electrique_borne">ElectriqueBorneActivity</string>
+    <string name="title_activity_user_settings">Paramètres utilisateur</string>
+    <string name="title_activity_maps">Carte</string>
+    <!-- Labels -->
+    <string name="menu_item_clear_memory_cache">Clear memory cache</string>
+    <string name="menu_item_clear_disc_cache">Clear disc cache</string>
+    <string name="menu_item_pause_on_scroll">Pause on scroll</string>
+    <string name="menu_item_pause_on_fling">Pause on fling</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="load_finish">Chargement terminé</string>
+    <string name="please_wait_while_loading">Chargement en cours</string>
+    <string name="pref_setting">Préférences utilisateurs</string>
+    <string name="pref_send_report_summary">Préférences summary</string>
+    <string name="pref_send_report">repport summary</string>
+    
+    
+</resources>

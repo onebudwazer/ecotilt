@@ -12,17 +12,19 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import fr.ecotilt.appui.model.AGenericObject;
 import fr.ecotilt.appui.model.Count;
 import fr.ecotilt.appui.model.GeoCoord;
 import fr.ecotilt.appui.model.Pompe;
 import fr.ecotilt.appui.model.Velib;
-import fr.ecotilt.appui.util.JsonApi;
-import fr.ecotilt.appui.util.MapUtil;
+import fr.ecotilt.appui.util.JsonManager;
+import fr.ecotilt.appui.util.MapManager;
 
 /**
  * WebServiceConfig access with singleton for tomcat thread
@@ -32,8 +34,8 @@ import fr.ecotilt.appui.util.MapUtil;
  */
 public class WebServiceConfig {
 
-	private Logger log = Logger.getLogger("WebServiceConfig");
-	
+	private Logger			log			= Logger.getLogger("WebServiceConfig");
+
 	public static final int	PAGE_SIZE	= 5;
 	public static int		pageNumber	= 0;
 	private Double			latitude	= 0.0;
@@ -72,25 +74,46 @@ public class WebServiceConfig {
 	 * @throws IOException
 	 */
 	public void setReponseHttp(HttpServletResponse response, Object result,
-			int numberOfResult) throws IOException {
-		
+			int numberOfResult) {
+
 		if (numberOfResult != 0) {
-			String responseJson = JsonApi
+			String responseJson = JsonManager
 					.JacksonObjectToJsonPrettyOutput(result);
-			response.getWriter().write(responseJson);
-			log.info(responseJson);
+			try {
+				response.getWriter().write(responseJson);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		} else {
-			log.info("none");
-			response.getWriter().write("none");
+
+			try {
+				response.getWriter().write("Unsupported get request");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
+	public void setReponseHttp(HttpServletResponse response, Object result)
+			throws IOException {
+		this.setReponseHttp(response, result, 1);
+	}
+
+	public Map<String, String> doConfigureServlet(HttpServletRequest request,
+			HttpServletResponse response) {
+		// on configure l'entete http
+		doConfigure(response);
+		//recupere l'ensemble des parametres
+		return getAllParametersFromServlet(request);
+	}
+
 	/**
-	 * defini l'entete du request http
+	 * defini l'entete du request http json
 	 * 
 	 * @param response
 	 */
-	public void doConfigure(HttpServletResponse response) {
+	private void doConfigure(HttpServletResponse response) {
 		// on défini l'entete
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
@@ -103,10 +126,12 @@ public class WebServiceConfig {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map<String, String> parametersManager(HttpServletRequest request) {
+	private Map<String, String> getAllParametersFromServlet(
+			HttpServletRequest request) {
 		// on commence par creer la requete
 		Map params = request.getParameterMap();
 		Iterator i = params.keySet().iterator();
+		pageNumber = 0;
 
 		Map<String, String> queryParameters = new HashMap<String, String>();
 		while (i.hasNext()) {
@@ -115,7 +140,7 @@ public class WebServiceConfig {
 
 			if (key.equals("p")) {
 				pageNumber = Integer.valueOf(value);
-				log.info(String.valueOf(pageNumber));
+				log.info(key + ": " + value);
 			}
 			if (key.equals("city")) {
 				queryParameters.put(key, value);
@@ -124,7 +149,10 @@ public class WebServiceConfig {
 				queryParameters.put(key, value);
 			}
 			if (key.equals("cp")) {
-				queryParameters.put("CODE_POSTAL", value);
+				queryParameters.put(key, value);
+			}
+			if (key.equals("c")) {
+				queryParameters.put(key, value);
 			}
 			if (key.equals("lng")) {
 				longitude = Double.valueOf(value);
@@ -132,8 +160,11 @@ public class WebServiceConfig {
 			if (key.equals("lat")) {
 				latitude = Double.valueOf(value);
 			}
+			if (key.equals("d")) {
+				MapManager.getInstance().setDistanceArea(Double.valueOf(value));
+			}
 		}
-		
+
 		return queryParameters;
 	}
 
@@ -160,7 +191,7 @@ public class WebServiceConfig {
 			Map<String, String> queryParameters) {
 		Count modelCount = new Count();
 		Class clazz = null;
-		
+
 		if (queryParameters.get("c") != null) {
 			String value = queryParameters.get("c");
 
@@ -178,15 +209,51 @@ public class WebServiceConfig {
 		}
 		return modelCount;
 	}
-	
+
 	private Count internalCountQuery(Session session, Class<?> clazz) {
 		Count modelCount = new Count();
-		
+
 		long number = (Long) session.createCriteria(clazz)
 				.setProjection(Projections.rowCount()).uniqueResult();
-		
+
 		modelCount.setValue(number);
 		return modelCount;
+	}
+
+	public Criteria queryConstructor(Session session,
+			Map<String, String> queryParameters,
+			@SuppressWarnings("rawtypes") Class clazz) {
+
+		Criteria criteria = session.createCriteria(clazz);
+
+		if (queryParameters.size() != 0) {
+			Set<String> cles = queryParameters.keySet();
+			Iterator<String> it = cles.iterator();
+
+			while (it.hasNext()) {
+				String cle = it.next();
+				String valeur = queryParameters.get(cle);
+
+				if (cle.equals("p")) {
+					pageNumber = Integer.valueOf(valeur);
+				}
+				if (cle.equals("city")) {
+					criteria.add(Restrictions.like("city", valeur));
+				}
+				if (cle.equals("name")) {
+					criteria.add(Restrictions.like("name", valeur));
+				}
+				if (cle.equals("cp")) {
+					criteria.add(Restrictions.like("codePostal", valeur));
+				}
+				// if (cle.equals("c") && valeur.equals("count")) {
+				// criteria.setProjection(Projections.rowCount())
+				// .uniqueResult();
+				// }
+			}
+		}
+
+		return criteria;
 	}
 
 	public Query queryConstructor(Session session,
@@ -208,17 +275,26 @@ public class WebServiceConfig {
 				}
 			}
 		}
-		//log
+		// log
 		log.info("queryConstructor: " + queryBuilder.toString());
 		// return query
 		return session.createQuery(queryBuilder.toString());
 	}
 
-	public Query queryConfiguration(Query query) {
+	@SuppressWarnings("unused")
+	@Deprecated
+	private Query queryConfiguration(Query query) {
 		query.setCacheable(true);
 		query.setMaxResults(PAGE_SIZE);
 		query.setFirstResult(PAGE_SIZE * pageNumber);
 		return query;
+	}
+
+	public Criteria queryConfiguration(Criteria criteria) {
+		criteria.setCacheable(true);
+		criteria.setMaxResults(PAGE_SIZE);
+		criteria.setFirstResult(PAGE_SIZE * pageNumber);
+		return criteria;
 	}
 
 	public GeoCoord defineMypositionGeo(HttpServletRequest request) {
@@ -245,8 +321,8 @@ public class WebServiceConfig {
 				AGenericObject instanceObject = (AGenericObject) myList
 						.get(index);
 				GeoCoord refGeoCoord = instanceObject.getGeoCoord();
-				boolean value = MapUtil
-						.distFrom2points(myPosition, refGeoCoord);
+				boolean value = MapManager.getInstance().distFrom2points(
+						myPosition, refGeoCoord);
 				if (value == true) {
 					newResult.add(instanceObject);
 				}
@@ -254,5 +330,4 @@ public class WebServiceConfig {
 			return newResult;
 		}
 	}
-
 }

@@ -6,31 +6,8 @@
 	<display-name>project_mobile_webservice</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	<servlet>
-		<display-name>Webservice</display-name>
-		<servlet-name>Webservice</servlet-name>
-		<servlet-class>fr.ecotilt.webservice.Webservice</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Webservice</servlet-name>
-		<url-pattern>/Webservice</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<display-name>Critaria</display-name>
-		<servlet-name>Critaria</servlet-name>
-		<servlet-class>fr.ecotilt.webservice.Critaria</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Critaria</servlet-name>
-		<url-pattern>/Critaria</url-pattern>
-	</servlet-mapping>
-	
 	<servlet>
 		<display-name>WsPompe</display-name>
 		<servlet-name>WsPompe</servlet-name>
@@ -40,27 +17,6 @@
 		<servlet-name>WsPompe</servlet-name>
 		<url-pattern>/wspompe</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
-		<display-name>WsBounding</display-name>
-		<servlet-name>WsBounding</servlet-name>
-		<servlet-class>fr.ecotilt.webservice.WsBounding</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>WsBounding</servlet-name>
-		<url-pattern>/wsbounding</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<display-name>Parameter</display-name>
-		<servlet-name>Parameter</servlet-name>
-		<servlet-class>fr.ecotilt.webservice.Parameter</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Parameter</servlet-name>
-		<url-pattern>/Parameter</url-pattern>
-	</servlet-mapping>
-	
 	<servlet>
 		<display-name>WsCount</display-name>
 		<servlet-name>WsCount</servlet-name>
@@ -70,7 +26,6 @@
 		<servlet-name>WsCount</servlet-name>
 		<url-pattern>/wscount</url-pattern>
 	</servlet-mapping>
-	
 	<servlet>
 		<display-name>WsVelib</display-name>
 		<servlet-name>WsVelib</servlet-name>
@@ -80,4 +35,28 @@
 		<servlet-name>WsVelib</servlet-name>
 		<url-pattern>/wsvelib</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<display-name>WsGenerateDatabase</display-name>
+		<servlet-name>WsGenerateDatabase</servlet-name>
+		<servlet-class>fr.ecotilt.webservice.WsGenerateDatabase</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WsGenerateDatabase</servlet-name>
+		<url-pattern>/wsgeneratedatabase</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<display-name>WsBorneElectrique</display-name>
+		<servlet-name>WsBorneElectrique</servlet-name>
+		<servlet-class>fr.ecotilt.webservice.WsBorneElectrique</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WsBorneElectrique</servlet-name>
+		<url-pattern>/wsborneelectrique</url-pattern>
+	</servlet-mapping>
+	
+<!-- 	<listener> -->
+<!-- 		<listener-class>fr.ecotilt.webservice.util.AppServletContextListener</listener-class> -->
+<!-- 	</listener> -->
 </web-app>

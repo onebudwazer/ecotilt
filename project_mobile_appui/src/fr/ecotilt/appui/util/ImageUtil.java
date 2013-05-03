@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -16,55 +15,51 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.imgscalr.Scalr.Method;
 
+import fr.ecotilt.appui.rsc.Ressources;
+
+/**
+ * Permet le traitement d'une image
+ * dependance vers lib Scalr
+ * @author Philippe
+ *
+ */
 public class ImageUtil {
-	
-	private File input;
-	
-	private static final 
-		int SIZE_IMG = 400;	
-	
-//	private static final 
-//		Dimension STC_BNDARY_IMG = 
-//		new Dimension(SIZE_IMG, SIZE_IMG);
-	
-	/**
-	 * Chemin de la ressource IMAGE
-	 * @param path
-	 */
-	public ImageUtil(String path) {
-		URL in = this.getClass().getResource(path);
-		// InputStream in = this.getClass().
-		// getResourceAsStream("/SomeTextFile.txt");
-		try {
-			input = new File(in.toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public ImageUtil(File file) {
-		input = file;
-	}
-	
+
+	private URL					url;
+
+	private static final int	SIZE_IMG	= 400;
+
+	private BufferedImage		instanceBufferedImage;
 
 	/**
-	 * Donne l'instance BufferedImage Original
-	 * @return
+	 * Chemin de la ressource IMAGE en rapport au projet appui
+	 * 
+	 * @param path
+	 *            of ressources
 	 */
-	public BufferedImage getInstanceBufferedImage() {
+	public ImageUtil(String path) {
+		url = Ressources.class.getResource(path);
+
 		try {
-			BufferedImage originalImage = ImageIO.read(this.input);
-			return originalImage;
+			instanceBufferedImage = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
-	
+
+	/**
+	 * Donne l'instance BufferedImage
+	 * 
+	 * @return instanceBufferedImage
+	 */
+	public BufferedImage getBufferedImage() {
+		return instanceBufferedImage;
+	}
+
 	public byte[] getImgToByteScalr() {
-		BufferedImage originalImage = getInstanceBufferedImage();
-		BufferedImage finalImage = Scalr.resize(originalImage, Method.AUTOMATIC, 
-				SIZE_IMG, Scalr.OP_ANTIALIAS, Scalr.OP_BRIGHTER);
+		BufferedImage finalImage = Scalr.resize(instanceBufferedImage,
+				Method.AUTOMATIC, SIZE_IMG, Scalr.OP_ANTIALIAS,
+				Scalr.OP_BRIGHTER);
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ImageIO.write(finalImage, "jpg", baos);
@@ -76,15 +71,17 @@ public class ImageUtil {
 		}
 		return null;
 	}
-	
+
+	@Deprecated
+	@SuppressWarnings("unused")
 	public byte[] getImgToByteOriginal() {
-		BufferedImage originalImage = getInstanceBufferedImage();
-		@SuppressWarnings("unused")
+		BufferedImage originalImage = instanceBufferedImage;
 		Dimension originSizeImg = new Dimension(originalImage.getWidth(),
 				originalImage.getHeight());
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			//ImageIO.write(finalImage, "png", new File("C:\\eclipse\\test.png"));
+			// ImageIO.write(finalImage, "png", new
+			// File("C:\\eclipse\\test.png"));
 			ImageIO.write(originalImage, "png", baos);
 			byte[] imageInByte = baos.toByteArray();
 			baos.flush();
@@ -94,31 +91,31 @@ public class ImageUtil {
 		}
 		return null;
 	}
-	
+
 	@SuppressWarnings("unused")
-	private static BufferedImage resizeImage(BufferedImage originalImage, Dimension size) {
-		
+	private static BufferedImage resizeImage(BufferedImage originalImage,
+			Dimension size) {
+
 		BufferedImage resizedImage = new BufferedImage((int) size.getWidth(),
-													   (int) size.getHeight(), 
-													   originalImage.getType());
+				(int) size.getHeight(), originalImage.getType());
 		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, (int) size.getWidth(), 
-				 						 (int) size.getHeight(), null);
+		g.drawImage(originalImage, 0, 0, (int) size.getWidth(),
+				(int) size.getHeight(), null);
 		g.dispose();
 		return resizedImage;
 	}
-	
+
 	@SuppressWarnings("unused")
-	private BufferedImage resizeImageWithHint(BufferedImage originalImage, Dimension size) {
+	private BufferedImage resizeImageWithHint(BufferedImage originalImage,
+			Dimension size) {
 
 		BufferedImage resizedImage = new BufferedImage((int) size.getWidth(),
-				   									   (int) size.getHeight(), 
-				   									   originalImage.getType());
+				(int) size.getHeight(), originalImage.getType());
 		Graphics2D g = resizedImage.createGraphics();
-		
-		g.drawImage(originalImage, 0, 0, (int) size.getWidth(), 
-										 (int) size.getHeight(), null);
-		
+
+		g.drawImage(originalImage, 0, 0, (int) size.getWidth(),
+				(int) size.getHeight(), null);
+
 		g.setComposite(AlphaComposite.Src);
 		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
 				RenderingHints.VALUE_INTERPOLATION_BICUBIC);
@@ -129,30 +126,30 @@ public class ImageUtil {
 		g.dispose();
 		return resizedImage;
 	}
-	
+
 	public Dimension keepRatio(Dimension origin, Dimension bound) {
 
-		 int originalWidth = (int) origin.getWidth();
-		 int originalHeight = (int) origin.getHeight();
+		int originalWidth = (int) origin.getWidth();
+		int originalHeight = (int) origin.getHeight();
 
-		 int boundWidth = (int) bound.getWidth();
-		 int boundHeight = (int) bound.getHeight();
-		 
-		 int newWidth  = originalWidth;
-		 int newHeight = originalHeight;
-		 
-		 if(originalWidth > boundWidth) {
-		  newWidth = boundWidth;
-		  newHeight = (newWidth * originalHeight) / originalWidth;
-		 }
-		 
-		 if(originalHeight > boundHeight) {
-		  newHeight = boundHeight;
-		  newWidth = (newHeight * originalWidth) / originalHeight;
-		 }
-		 
-		 return new Dimension(newWidth, newHeight);
+		int boundWidth = (int) bound.getWidth();
+		int boundHeight = (int) bound.getHeight();
+
+		int newWidth = originalWidth;
+		int newHeight = originalHeight;
+
+		if (originalWidth > boundWidth) {
+			newWidth = boundWidth;
+			newHeight = (newWidth * originalHeight) / originalWidth;
 		}
+
+		if (originalHeight > boundHeight) {
+			newHeight = boundHeight;
+			newWidth = (newHeight * originalWidth) / originalHeight;
+		}
+
+		return new Dimension(newWidth, newHeight);
+	}
 
 	public static void main(String[] args) throws URISyntaxException {
 		System.out.println("*************************************");
@@ -162,14 +159,6 @@ public class ImageUtil {
 
 	// System.out.println(generateByteImg("C:\\eclipse\\test.jpg"));
 	// public byte[] extractBytes (String ImageName) throws IOException {
-	// // open image
-	// File imgPath = new File(ImageName);
-	// BufferedImage bufferedImage = ImageIO.read(imgPath);
-	//
-	// // get DataBufferBytes from Raster
 	// WritableRaster raster = bufferedImage .getRaster();
 	// DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-	//
-	// return ( data.getData() );
-	// }
 }

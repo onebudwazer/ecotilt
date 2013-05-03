@@ -2,7 +2,6 @@ package fr.ecotilt.appui.model;
 
 import java.util.Date;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -14,8 +13,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Type;
-
 import fr.ecotilt.appui.util.CodePostal;
 
 @MappedSuperclass
@@ -24,8 +21,8 @@ public abstract class AGenericObject {
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
-	private int			id;
-	
+	private int				id;
+
 	@Column(name = "NAME")
 	protected String		name;
 
@@ -34,7 +31,7 @@ public abstract class AGenericObject {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "GEOCOORD_ID")
-	protected GeoCoord	gc;
+	protected GeoCoord		gc;
 
 	@Column(name = "CITY")
 	protected String		city;
@@ -42,19 +39,19 @@ public abstract class AGenericObject {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PICTURE_ID")
 	protected PictureEntity	pe;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CATEGORY_ID", nullable = false)
+	@JoinColumn(name = "CATEGORY_ID", nullable = true)
 	protected Category		category;
 
-	@Column(name="DATE")
+	@Column(name = "DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	protected Date date;
-	
+	protected Date			date;
+
 	public AGenericObject() {
 		this.date = new Date();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -118,14 +115,13 @@ public abstract class AGenericObject {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public Date getDate() {
-	    return date;
-	}
-	
-	public void setDate(Date date) {
-	    this.date = date;
+		return date;
 	}
 
-	
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 }
