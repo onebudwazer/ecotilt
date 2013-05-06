@@ -29,7 +29,6 @@ public class Counting implements IStrategy {
 		Map<String, String> listParameters = WebServiceConfig.getInstance()
 				.doConfigureServlet(request, response);
 
-		// ouverture d'une session hibernate
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		Criteria criteria = WebServiceConfig.getInstance().queryConstructor(

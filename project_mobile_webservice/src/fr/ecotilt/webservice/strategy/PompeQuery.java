@@ -37,7 +37,7 @@ public class PompeQuery implements IStrategy {
 		@SuppressWarnings("unchecked")
 		List<Pompe> result = (List<Pompe>) requeteFinal.list();
 
-		// //on definie une position la position si elle existe
+		//on definie une position la position si elle existe
 		GeoCoord myPosition = WebServiceConfig.getInstance()
 				.defineMypositionGeo(request);
 
