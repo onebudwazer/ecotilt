@@ -41,27 +41,13 @@ public class WebServiceConfig {
 	private Double			latitude	= 0.0;
 	private Double			longitude	= 0.0;
 
-	/**
-	 * oblige d'avoir un constructeur prive
-	 */
 	private WebServiceConfig() {
 	}
 
-	/**
-	 * singleton en chargement lazy
-	 * 
-	 * @author Philippe
-	 * 
-	 */
 	private static class LazySingleton {
 		private static WebServiceConfig	instance	= new WebServiceConfig();
 	}
 
-	/**
-	 * return 1 instance de WebServiceConfig
-	 * 
-	 * @return
-	 */
 	public static WebServiceConfig getInstance() {
 		return LazySingleton.instance;
 	}
@@ -102,29 +88,16 @@ public class WebServiceConfig {
 
 	public Map<String, String> doConfigureServlet(HttpServletRequest request,
 			HttpServletResponse response) {
-		// on configure l'entete http
 		doConfigure(response);
-		//recupere l'ensemble des parametres
 		return getAllParametersFromServlet(request);
 	}
 
-	/**
-	 * defini l'entete du request http json
-	 * 
-	 * @param response
-	 */
 	private void doConfigure(HttpServletResponse response) {
 		// on défini l'entete
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 	}
 
-	/**
-	 * Recupere l'ensemble des paramètre d'une requete http si ils existent
-	 * 
-	 * @param request
-	 * @return
-	 */
 	@SuppressWarnings("rawtypes")
 	private Map<String, String> getAllParametersFromServlet(
 			HttpServletRequest request) {
@@ -170,7 +143,6 @@ public class WebServiceConfig {
 
 	@SuppressWarnings("rawtypes")
 	public Map<String, String> countingManager(HttpServletRequest request) {
-		// on commence par creer la requete
 		Map params = request.getParameterMap();
 		Iterator i = params.keySet().iterator();
 
@@ -246,10 +218,6 @@ public class WebServiceConfig {
 				if (cle.equals("cp")) {
 					criteria.add(Restrictions.like("codePostal", valeur));
 				}
-				// if (cle.equals("c") && valeur.equals("count")) {
-				// criteria.setProjection(Projections.rowCount())
-				// .uniqueResult();
-				// }
 			}
 		}
 
@@ -277,17 +245,7 @@ public class WebServiceConfig {
 		}
 		// log
 		log.info("queryConstructor: " + queryBuilder.toString());
-		// return query
 		return session.createQuery(queryBuilder.toString());
-	}
-
-	@SuppressWarnings("unused")
-	@Deprecated
-	private Query queryConfiguration(Query query) {
-		query.setCacheable(true);
-		query.setMaxResults(PAGE_SIZE);
-		query.setFirstResult(PAGE_SIZE * pageNumber);
-		return query;
 	}
 
 	public Criteria queryConfiguration(Criteria criteria) {

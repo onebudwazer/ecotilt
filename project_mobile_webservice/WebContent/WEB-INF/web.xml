@@ -35,7 +35,7 @@
 		<servlet-name>WsVelib</servlet-name>
 		<url-pattern>/wsvelib</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<display-name>WsGenerateDatabase</display-name>
 		<servlet-name>WsGenerateDatabase</servlet-name>
@@ -45,8 +45,7 @@
 		<servlet-name>WsGenerateDatabase</servlet-name>
 		<url-pattern>/wsgeneratedatabase</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+	<servlet>
 		<display-name>WsBorneElectrique</display-name>
 		<servlet-name>WsBorneElectrique</servlet-name>
 		<servlet-class>fr.ecotilt.webservice.WsBorneElectrique</servlet-class>
@@ -55,8 +54,4 @@
 		<servlet-name>WsBorneElectrique</servlet-name>
 		<url-pattern>/wsborneelectrique</url-pattern>
 	</servlet-mapping>
-	
-<!-- 	<listener> -->
-<!-- 		<listener-class>fr.ecotilt.webservice.util.AppServletContextListener</listener-class> -->
-<!-- 	</listener> -->
 </web-app>
