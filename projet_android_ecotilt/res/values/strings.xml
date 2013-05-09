@@ -4,9 +4,11 @@
     <!-- Content descriptions -->
     <string name="app_name">Ecotilt</string>
     <!-- Activity titles -->
-    <string name="title_activity_electrique_borne">ElectriqueBorneActivity</string>
-    <string name="title_activity_user_settings">Paramètres utilisateur</string>
+    <string name="title_activity_electrique_borne">Bornes électriques</string>
+    <string name="title_activity_user_settings">Paramètres</string>
     <string name="title_activity_maps">Carte</string>
+    <string name="title_activity_empty"></string>
+    
     <!-- Labels -->
     <string name="menu_item_clear_memory_cache">Clear memory cache</string>
     <string name="menu_item_clear_disc_cache">Clear disc cache</string>
@@ -15,8 +17,8 @@
     <string name="action_settings">Paramètres</string>
     <string name="load_finish">Chargement terminé</string>
     <string name="please_wait_while_loading">Chargement en cours</string>
-    <string name="pref_setting">Préférences utilisateurs</string>
-    <string name="pref_send_report_summary">Préférences summary</string>
+    <string name="pref_setting">Préférences</string>
+    <string name="pref_send_report_summary">categorie numero 1</string>
     <string name="pref_send_report">repport summary</string>
     
     
