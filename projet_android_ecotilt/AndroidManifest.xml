@@ -20,10 +20,12 @@
     <!-- My Location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_GPS" />
-	<uses-permission android:name="android.permission.ACCESS_ASSISTED_GPS" />
-	<uses-permission android:name="android.permission.LOCATION" />
-    
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_ASSISTED_GPS" />
+    <uses-permission android:name="android.permission.LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+
     <!-- Maps API needs OpenGL ES 2.0. -->
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -68,12 +70,18 @@
             android:label="@string/title_activity_user_settings"
             android:screenOrientation="portrait" >
         </activity>
-<!--         <activity -->
-<!--             android:name="fr.ecotilt.activity.CartoActivity" -->
-<!--             android:label="@string/title_activity_user_settings" -->
-<!--             android:screenOrientation="portrait" > -->
-<!--         </activity> -->
-        <service android:name="fr.ecotilt.gps.PositionService"/>
+        <activity
+            android:name="fr.ecotilt.activity.CartoActivity"
+            android:label="@string/title_activity_user_settings"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="fr.ecotilt.activity.DescriptionObjectActivity"
+            android:label="@string/title_activity_empty"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <service android:name="fr.ecotilt.gps.LocationService" />
     </application>
 
 </manifest>
