@@ -8,11 +8,16 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
-        android:padding="5dp" />
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <ImageView
         android:id="@+id/imageView1"
@@ -20,5 +25,14 @@
         android:layout_height="200dp"
         android:adjustViewBounds="false"
         android:src="@drawable/gradient_bg" />
+
+    <TextView
+        android:id="@+id/adress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
 
 </LinearLayout>

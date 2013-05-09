@@ -15,6 +15,8 @@ public class DescriptionObjectActivity extends BaseActivity {
 	
 	private TextView title;
 	
+	private TextView address;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,7 +24,7 @@ public class DescriptionObjectActivity extends BaseActivity {
 		setContentView(R.layout.activity_description_object);
 		this.image = (ImageView) findViewById(R.id.imageView1);
 		this.title = (TextView) findViewById(R.id.textView2);
-		
+		this.address = (TextView) findViewById(R.id.adress);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		Bundle bundle = getIntent().getExtras();
 		
@@ -36,6 +38,8 @@ public class DescriptionObjectActivity extends BaseActivity {
 			this.image.setImageBitmap(decodedByte);
 			
 			this.title.setText(pe.getName());
+			
+			this.address.setText(pe.getCodePostal() + " " + pe.getCity() + " " + pe.getGeoCoord().toString());
 		}
 
 	}
