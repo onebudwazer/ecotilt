@@ -1,6 +1,13 @@
 package fr.ecotilt.appui.model;
 
-public class Velib extends AGenericObject {
+import java.io.Serializable;
+
+public class Velib extends AGenericObject implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long	serialVersionUID	= 4734731725518709104L;
 
 	public Velib() {
 	}

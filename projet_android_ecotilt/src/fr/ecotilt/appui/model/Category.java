@@ -1,6 +1,13 @@
 package fr.ecotilt.appui.model;
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long	serialVersionUID	= 8799696442923745502L;
 
 	private long		categoryId;
 

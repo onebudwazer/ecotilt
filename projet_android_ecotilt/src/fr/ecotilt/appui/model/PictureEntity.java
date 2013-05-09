@@ -1,8 +1,15 @@
 package fr.ecotilt.appui.model;
 
+import java.io.Serializable;
 
-public class PictureEntity {
+
+public class PictureEntity implements Serializable {
 	 
+	/**
+	 * serialVersionUID
+	 */
+	private static final long	serialVersionUID	= 2534304516669105673L;
+
 	private long pictureId;
 	
 	private byte[] image;

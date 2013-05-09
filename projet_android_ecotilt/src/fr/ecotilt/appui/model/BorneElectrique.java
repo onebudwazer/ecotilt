@@ -1,7 +1,14 @@
 package fr.ecotilt.appui.model;
 
-public class BorneElectrique extends AGenericObject {
+import java.io.Serializable;
+
+public class BorneElectrique extends AGenericObject implements Serializable {
 	
+	/**
+	 * serialVersionUID
+	 */
+	private static final long	serialVersionUID	= -3426546276898177605L;
+
 	public BorneElectrique() {
 	}
 

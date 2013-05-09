@@ -1,10 +1,14 @@
 package fr.ecotilt.appui.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+public abstract class AGenericObject implements Serializable {
 
-
-public abstract class AGenericObject {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long	serialVersionUID	= 2632816506703165226L;
 
 	private int				id;
 

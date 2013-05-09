@@ -1,6 +1,13 @@
 package fr.ecotilt.appui.model;
 
-public class Pompe extends AGenericObject {
+import java.io.Serializable;
+
+public class Pompe extends AGenericObject implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long	serialVersionUID	= -4683827843050356958L;
 
 	public Pompe() {
 	}
