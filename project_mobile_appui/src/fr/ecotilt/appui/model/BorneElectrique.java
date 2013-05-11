@@ -25,4 +25,12 @@ public class BorneElectrique extends AGenericObject {
 		this.city = city;
 		this.pe = pe;
 	}
+	
+	public BorneElectrique(AGenericObject genericItem){
+		name= genericItem.getName();
+		gc = genericItem.getGeoCoord();
+		codePostal = genericItem.getCodePostal();
+		city = genericItem.getCity();
+		pe = genericItem.getPictureEntity();
+	}
 }
