@@ -1,6 +1,7 @@
 package fr.ecotilt.appui.hibernate.generatedatabase;
 
 import java.net.URISyntaxException;
+import java.util.Random;
 
 import org.hibernate.Session;
 
@@ -18,7 +19,7 @@ public class GeneratePoint {
 	public static void main(String[] args) throws URISyntaxException {
 		// call hibernate
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		generateBorne(session);
+		generatePompe(session);
 		generateVelib(session);
 		generateBorneElectrique(session);
 		// Category instance =
@@ -49,13 +50,13 @@ public class GeneratePoint {
 		session.close();
 	}
 
-	public static void generateBorne(Session session) {
+	public static void generatePompe(Session session) {
 		for (int i = 0; i < 100; i++) {
-			ImageUtil instance = new ImageUtil("300x300.png");
+			ImageUtil instance = new ImageUtil(String.valueOf(new Random().nextInt(6)));
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();
 			pe.setImage(bInstanceImg);
-			HibernateUtil.saveToHibernate(session, new Pompe("Borne " + i,
+			HibernateUtil.saveToHibernate(session, new Pompe("Pompe " + i,
 					"Toulon", RandomNumber.getRandomInt(99999), new GeoCoord(
 							RandomNumber.randomAreaMarseilleLatitude(),
 							RandomNumber.randomAreaMarseilleLongitude()), pe));
@@ -65,11 +66,11 @@ public class GeneratePoint {
 
 	public static void generateBorneElectrique(Session session) {
 		for (int i = 0; i < 100; i++) {
-			ImageUtil instance = new ImageUtil("2013.jpg");
+			ImageUtil instance = new ImageUtil(String.valueOf(new Random().nextInt(6)));
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();
 			pe.setImage(bInstanceImg);
-			HibernateUtil.saveToHibernate(session, new BorneElectrique("Pompe "
+			HibernateUtil.saveToHibernate(session, new BorneElectrique("Borne Electrique "
 					+ i, "Marseille", RandomNumber.getRandomInt(99999),
 					new GeoCoord(RandomNumber.randomAreaMarseilleLatitude(),
 							RandomNumber.randomAreaMarseilleLongitude()), pe));
@@ -78,7 +79,7 @@ public class GeneratePoint {
 
 	public static void generateVelib(Session session) {
 		for (int i = 0; i < 100; i++) {
-			ImageUtil instance = new ImageUtil("2013.jpg");
+			ImageUtil instance = new ImageUtil(String.valueOf(new Random().nextInt(6)));
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();
 			pe.setImage(bInstanceImg);

@@ -8,7 +8,7 @@ public class RandomNumber {
 
 	public static int getRandomInt(int mod) {
 		Random rand = new Random();
-		return Math.abs(rand.nextInt()) % mod + 1;
+		return Math.abs(rand.nextInt(mod)) % mod + 1;
 	}
 
 	public static Double getRandomDouble(Double mod) {
@@ -33,8 +33,13 @@ public class RandomNumber {
 		// System.out.println(inRangeDouble(7.05165165, 18.05156561));
 		// }
 
-		System.out.println(randomAreaMarseilleLatitude());
-		System.out.println(randomAreaMarseilleLongitude());
+//		System.out.println(getRandomInt(99999));
+		
+		for (int i = 0; i < 100; i++) {
+			System.out.println(new Random().nextInt(6));
+		}
+//		System.out.println(randomAreaMarseilleLatitude());
+//		System.out.println(randomAreaMarseilleLongitude());
 	}
 
 	public static double randomAreaMarseilleLatitude() {
