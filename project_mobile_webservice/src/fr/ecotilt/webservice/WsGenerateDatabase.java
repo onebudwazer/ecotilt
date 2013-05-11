@@ -40,7 +40,7 @@ public class WsGenerateDatabase extends HttpServlet {
 				.setProjection(Projections.rowCount()).uniqueResult();
 
 		if (countBorneElectrique == 0 && countPompe == 0 && countVelib == 0) {
-			 GeneratePoint.generateBorne(session);
+			 GeneratePoint.generatePompe(session);
 			 GeneratePoint.generateBorneElectrique(session);
 			 GeneratePoint.generateVelib(session);
 			 WebServiceConfig.getInstance().setReponseHttp(response, "Generation de la base...");

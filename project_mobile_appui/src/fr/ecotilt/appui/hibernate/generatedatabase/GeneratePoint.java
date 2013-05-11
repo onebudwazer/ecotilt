@@ -51,8 +51,10 @@ public class GeneratePoint {
 	}
 
 	public static void generatePompe(Session session) {
+		
+		int value = new Random().nextInt(6);
 		for (int i = 0; i < 100; i++) {
-			ImageUtil instance = new ImageUtil(String.valueOf(new Random().nextInt(6)));
+			ImageUtil instance = new ImageUtil(String.valueOf(value) + ".jpg");
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();
 			pe.setImage(bInstanceImg);
@@ -65,8 +67,9 @@ public class GeneratePoint {
 	}
 
 	public static void generateBorneElectrique(Session session) {
+		int value = new Random().nextInt(6);
 		for (int i = 0; i < 100; i++) {
-			ImageUtil instance = new ImageUtil(String.valueOf(new Random().nextInt(6)));
+			ImageUtil instance = new ImageUtil(String.valueOf(value) + ".jpg");
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();
 			pe.setImage(bInstanceImg);
@@ -78,8 +81,9 @@ public class GeneratePoint {
 	}
 
 	public static void generateVelib(Session session) {
+		int value = new Random().nextInt(6);
 		for (int i = 0; i < 100; i++) {
-			ImageUtil instance = new ImageUtil(String.valueOf(new Random().nextInt(6)));
+			ImageUtil instance = new ImageUtil(String.valueOf(value) + ".jpg");
 			byte[] bInstanceImg = instance.getImgToByteScalr();
 			PictureEntity pe = new PictureEntity();
 			pe.setImage(bInstanceImg);

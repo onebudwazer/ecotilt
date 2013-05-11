@@ -77,8 +77,9 @@ public class CallWebService {
 	public boolean checkConnectivity(Context context) {
 		boolean value = isOnline(context);
 		if (value) {
-			Toast.makeText(context, "connection internet", Toast.LENGTH_SHORT)
-					.show();
+			// Toast.makeText(context, "connection internet",
+			// Toast.LENGTH_SHORT)
+			// .show();
 		} else {
 			Toast.makeText(context, "Vous avez besoin d'internet",
 					Toast.LENGTH_SHORT).show();
