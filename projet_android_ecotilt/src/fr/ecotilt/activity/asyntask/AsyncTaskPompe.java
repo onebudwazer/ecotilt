@@ -36,32 +36,40 @@ public class AsyncTaskPompe extends AsyncTask<URL, Integer, Long> {
 
 		int count = urls.length;
 		for (int i = 0; i < count; i++) {
-			String content = CallWebService.getInstance().getContent(
-					urls[i].toString());
-			ObjectMapper mapper = new ObjectMapper();
-			ArrayList<Pompe> membersWrapper;
+			String content = null;
 			try {
-				membersWrapper = mapper.readValue(content,
-						new TypeReference<ArrayList<Pompe>>() {});
+				content = CallWebService.getInstance().getContent(
+						urls[i].toString());
 
-				listPompe.addAll(membersWrapper);
-				messageCallBack = "Chargement terminé";
-			} catch (JsonParseException e) {
-				Log.e("4001", e.toString());
-				messageCallBack = e.toString();
-			} catch (JsonMappingException e) {
-				Log.e("4002", e.toString());
-				messageCallBack = e.toString();
-			} catch (IOException e) {
-				Log.e("4003", e.toString());
-				messageCallBack = e.toString();
+				ObjectMapper mapper = new ObjectMapper();
+				ArrayList<Pompe> membersWrapper;
+
+				try {
+					membersWrapper = mapper.readValue(content,
+							new TypeReference<ArrayList<Pompe>>() {
+							});
+
+					listPompe.addAll(membersWrapper);
+					// messageCallBack = "ajout de nouvelles données";
+				} catch (JsonParseException e) {
+					Log.e("4001", e.toString());
+					messageCallBack = e.toString();
+				} catch (JsonMappingException e) {
+					Log.e("4002", e.toString());
+					messageCallBack = e.toString();
+				} catch (IOException e) {
+					Log.e("4003", e.toString());
+					messageCallBack = e.toString();
+				}
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				messageCallBack = "Erreur de connection au webservice";
 			}
 		}
 		return (long) 0;
 	}
 
 	protected void onProgressUpdate(Integer... progress) {
-		// setProgressPercent(progress[0]);
 	}
 
 	protected void onPostExecute(Long result) {

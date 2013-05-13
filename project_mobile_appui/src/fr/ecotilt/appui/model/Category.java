@@ -1,7 +1,5 @@
 package fr.ecotilt.appui.model;
 
-import java.util.List;
-
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,8 +28,6 @@ public class Category {
 
 	@Column(name = "CATEGORIE_DESCRIPTION")
 	private String		description;
-	
-	private List<AGenericObject> items;
 
 	public Category() {
 	}
@@ -65,32 +61,6 @@ public class Category {
 		this.description = description;
 	}
 
-	public List<AGenericObject> getItems() {
-		return items;
-	}
 
-	public void setItems(List<AGenericObject> items) {
-		this.items = items;
-	}
-	
-	public boolean addItem(AGenericObject item){
-		try{
-			items.add(item);
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-	}
-	
-	public boolean removeItem(AGenericObject item){
-		try{
-			items.remove(item);
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-	}
 
 }

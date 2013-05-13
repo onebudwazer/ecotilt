@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AbsListView;
@@ -108,7 +109,6 @@ public class ElectriqueBorneActivity extends BaseActivity implements
 			valuesUi.add(pompe.getName());
 		}
 		adapter.notifyDataSetChanged();
-
 		setProgressBarIndeterminateVisibility(false);
 	}
 
@@ -146,6 +146,10 @@ public class ElectriqueBorneActivity extends BaseActivity implements
 
 	@Override
 	public void onTaskError(String error) {
+		if (error != null) {
+			Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT)
+					.show();
+		}
 	}
 
 	@Override
@@ -161,4 +165,36 @@ public class ElectriqueBorneActivity extends BaseActivity implements
 	public void onPreExecute() {
 		setProgressBarIndeterminateVisibility(true);
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_settings:
+				Intent intent = new Intent(ElectriqueBorneActivity.this, UserSettingActivity.class);
+	        	startActivity(intent);
+				return true;
+				
+			case R.id.action_maps:
+				Intent i = new Intent(ElectriqueBorneActivity.this, CartoActivity.class);
+				PompeList pompelist = new PompeList(this.listPompe);
+				i.putExtra("listPompe", pompelist);
+	        	startActivity(i);
+				return true;
+				
+			case android.R.id.home:
+				// This is called when the Home (Up) button is pressed
+				Intent parentActivityIntent = new Intent(this, MainActivity.class);
+				parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+						 					| Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(parentActivityIntent);
+				finish();
+				return true;
+				
+			default:
+				return false;
+		}
+	}
+	
+	
+	
 }

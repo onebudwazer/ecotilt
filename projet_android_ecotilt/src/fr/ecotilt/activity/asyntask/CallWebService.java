@@ -1,14 +1,12 @@
 package fr.ecotilt.activity.asyntask;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -32,36 +30,32 @@ public class CallWebService {
 		return LazySingleton.instance;
 	}
 
-	public String getContent(String url) {
+	public String getContent(String url) throws Exception {
 		StringBuilder builder = new StringBuilder();
 		HttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(url);
-		// "http://192.168.1.74:8080/project_mobile_webservice/wspompe");
-		try {
-			HttpResponse response = client.execute(httpGet);
+		HttpResponse response = null;
+		response = client.execute(httpGet);
 
-			StatusLine statusLine = response.getStatusLine();
-			int statusCode = statusLine.getStatusCode();
-			if (statusCode == 200) {
-				HttpEntity entity = response.getEntity();
-				InputStream content = entity.getContent();
-				BufferedReader reader = new BufferedReader(
-						new InputStreamReader(content));
-				String line;
-				while ((line = reader.readLine()) != null) {
-					builder.append(line);
-				}
+		StatusLine statusLine = response.getStatusLine();
+		int statusCode = statusLine.getStatusCode();
 
-				return builder.toString();
-			} else {
-				Log.e("Erreur Lecture du flux json", String.valueOf(statusCode));
+		if (statusCode == 200) {
+			HttpEntity entity = response.getEntity();
+			InputStream content = entity.getContent();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					content));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				builder.append(line);
 			}
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+			return builder.toString();
+		} else {
+			Log.e("Erreur Lecture du flux json", String.valueOf(statusCode));
 		}
-		return new StringBuilder().toString();
+
+		return new StringBuilder("error").toString();
 	}
 
 	private boolean isOnline(Context context) {

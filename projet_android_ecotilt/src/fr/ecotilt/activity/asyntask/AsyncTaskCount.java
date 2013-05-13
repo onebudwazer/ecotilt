@@ -17,6 +17,8 @@ public class AsyncTaskCount extends AsyncTask<URL, Integer, Long> {
 	private ITaskCompletedCount	listener;
 
 	private Count				callBackCount;
+	
+	private String				messageCallBack;
 
 	public AsyncTaskCount(ITaskCompletedCount listener) {
 		this.listener = listener;
@@ -27,17 +29,24 @@ public class AsyncTaskCount extends AsyncTask<URL, Integer, Long> {
 
 		int count = urls.length;
 		for (int i = 0; i < count; i++) {
-			String content = CallWebService.getInstance().getContent(
-					urls[i].toString());
-			ObjectMapper mapper = new ObjectMapper();
+			String content = null;
 			try {
-				callBackCount = mapper.readValue(content, Count.class);
-			} catch (JsonParseException e) {
-				Log.e("4001", e.toString());
-			} catch (JsonMappingException e) {
-				Log.e("4002", e.toString());
-			} catch (IOException e) {
-				Log.e("4003", e.toString());
+				content = CallWebService.getInstance().getContent(
+						urls[i].toString());
+				
+				ObjectMapper mapper = new ObjectMapper();
+				try {
+					callBackCount = mapper.readValue(content, Count.class);
+				} catch (JsonParseException e) {
+					Log.e("4001", e.toString());
+				} catch (JsonMappingException e) {
+					Log.e("4002", e.toString());
+				} catch (IOException e) {
+					Log.e("4003", e.toString());
+				}
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				messageCallBack = "Erreur de connection au webservice";
 			}
 		}
 		return (long) 0;
@@ -48,5 +57,6 @@ public class AsyncTaskCount extends AsyncTask<URL, Integer, Long> {
 
 	protected void onPostExecute(Long result) {
 		listener.onTaskCompleted(callBackCount);
+		listener.onTaskError(this.messageCallBack);
 	}
 }

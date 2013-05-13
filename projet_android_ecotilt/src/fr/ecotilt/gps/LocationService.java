@@ -153,7 +153,7 @@ public class LocationService extends Service {
 	private class MyLocationListener implements LocationListener {
 
 		public void onLocationChanged(final Location locaction) {
-			Log.i("**************************************", "Location changed");
+//			Log.i("**************************************", "Location changed");
 			if (isBetterLocation(locaction, previousBestLocation)) {
 				locaction.getLatitude();
 				locaction.getLongitude();
@@ -162,12 +162,12 @@ public class LocationService extends Service {
 		}
 
 		public void onProviderDisabled(String provider) {
-			Toast.makeText(getApplicationContext(), "gps non activé",
+			Toast.makeText(getApplicationContext(), "Données de localisation non activé",
 					Toast.LENGTH_SHORT).show();
 		}
 
 		public void onProviderEnabled(String provider) {
-			Toast.makeText(getApplicationContext(), "gps activé",
+			Toast.makeText(getApplicationContext(), "Données de localisation activé",
 					Toast.LENGTH_SHORT).show();
 		}
 
